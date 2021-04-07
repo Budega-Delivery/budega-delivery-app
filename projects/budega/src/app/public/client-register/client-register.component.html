@@ -1,0 +1,42 @@
+<div class='container'>
+  <form [formGroup]="form">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-9 col-lg-8">
+        <h3  [ngClass]="routeAnimationsElements">{{'budega.client.register' | translate }}</h3>
+          <mat-card>
+          <div class="row">
+            <mat-form-field class="col-md-3 col-sm-12" [ngClass]="routeAnimationsElements">
+              <input matInput placeholder="{{'budega.client.firstname' | translate }}"
+                     formControlName="firstName">
+              <mat-error *ngIf="form.get('firstName').invalid">
+                {{'budega.notempty' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-md-9 col-sm-12" [ngClass]="routeAnimationsElements">
+              <input matInput placeholder="{{'budega.client.lastname' | translate }}"
+                     formControlName="lastName">
+              <mat-error *ngIf="form.get('lastName').invalid">
+                {{'budega.notempty' | translate }}
+              </mat-error>
+            </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-md-6 col-sm-8" [ngClass]="routeAnimationsElements">
+                <input type='email' matInput placeholder="{{'budega.client.email' | translate }}"
+                       formControlName="email">
+                <mat-error *ngIf="form.get('email').invalid">
+                  {{'budega.notempty' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class='row'>
+              <button mat-stroked-button color='accent' [disabled]="form.invalid"  [ngClass]="routeAnimationsElements" (click)='save()'>
+                {{'budega.client.create' | translate }}
+              </button>
+            </div>
+        </mat-card>
+      </div>
+    </div>
+  </form>
+</div>
+

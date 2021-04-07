@@ -1,0 +1,85 @@
+enum ProductStatus {
+  OUT_OF_STOCK = 'OUT_OF_STOCK',
+  IN_STOCK = 'IN_STOCK',
+  RUNNING_LOW = 'RUNNING_LOW'
+}
+
+export class NewProduct {
+  name?: string;
+  id?: string;
+}
+
+export class Image {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  buffer: any;
+  size: number;
+}
+
+export class ProductId {
+  id: string;
+}
+
+export class Product {
+  _id: string;
+  name: string;
+  isActive: boolean;
+  price: number;
+  image: Image;
+  status: ProductStatus;
+  department: ProductDepartment;
+  brand: ProductBrand;
+  categories: ProductCategory[];
+  stock: ProductStock;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export class ProductDepartment {
+  _id: string;
+  name: string;
+  description: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export class ProductBrand {
+  _id?: string;
+  name: string;
+  description?: string;
+  image?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export class ProductCategory {
+  _id?: string;
+  name: string;
+  image?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export class ProductStock {
+  _id: string;
+  amount: number;
+  minimumAlert: number;
+  stockHistory: ProductStockHistory;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// eslint-disable-next-line no-shadow
+enum StockHistoryAction {
+  GET = 'Get',
+  PUSH = 'Push'
+}
+
+export class ProductStockHistory {
+  id: string;
+  action: StockHistoryAction;
+  agent: string; // Users Keycloak ID
+  createdAt: string;
+}

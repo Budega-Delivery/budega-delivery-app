@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-ngrx-material-starter": {
+    "budega": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -11,26 +11,26 @@
           "style": "scss"
         }
       },
-      "root": "projects/angular-ngrx-material-starter",
-      "sourceRoot": "projects/angular-ngrx-material-starter/src",
-      "prefix": "anms",
+      "root": "projects/budega",
+      "sourceRoot": "projects/budega/src",
+      "prefix": "budega",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-ngrx-material-starter",
-            "index": "projects/angular-ngrx-material-starter/src/index.html",
-            "main": "projects/angular-ngrx-material-starter/src/main.ts",
-            "polyfills": "projects/angular-ngrx-material-starter/src/polyfills.ts",
-            "tsConfig": "projects/angular-ngrx-material-starter/tsconfig.app.json",
+            "outputPath": "dist/budega",
+            "index": "projects/budega/src/index.html",
+            "main": "projects/budega/src/main.ts",
+            "polyfills": "projects/budega/src/polyfills.ts",
+            "tsConfig": "projects/budega/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/angular-ngrx-material-starter/src/favicon.ico",
-              "projects/angular-ngrx-material-starter/src/assets"
+              "projects/budega/src/favicon.ico",
+              "projects/budega/src/assets"
             ],
             "styles": [
-              "projects/angular-ngrx-material-starter/src/styles-app-loading.scss",
-              "projects/angular-ngrx-material-starter/src/styles.scss"
+              "projects/budega/src/styles-app-loading.scss",
+              "projects/budega/src/styles.scss"
             ],
             "scripts": []
           },
@@ -38,8 +38,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/angular-ngrx-material-starter/src/environments/environment.ts",
-                  "with": "projects/angular-ngrx-material-starter/src/environments/environment.prod.ts"
+                  "replace": "projects/budega/src/environments/environment.ts",
+                  "with": "projects/budega/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -82,34 +82,34 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-ngrx-material-starter:build"
+            "browserTarget": "budega:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-ngrx-material-starter:build:production"
+              "browserTarget": "budega:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-ngrx-material-starter:build"
+            "browserTarget": "budega:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/angular-ngrx-material-starter/src/test.ts",
-            "polyfills": "projects/angular-ngrx-material-starter/src/polyfills.ts",
-            "tsConfig": "projects/angular-ngrx-material-starter/tsconfig.spec.json",
-            "karmaConfig": "projects/angular-ngrx-material-starter/karma.conf.js",
+            "main": "projects/budega/src/test.ts",
+            "polyfills": "projects/budega/src/polyfills.ts",
+            "tsConfig": "projects/budega/tsconfig.spec.json",
+            "karmaConfig": "projects/budega/karma.conf.js",
             "assets": [
-              "projects/angular-ngrx-material-starter/src/favicon.ico",
-              "projects/angular-ngrx-material-starter/src/assets"
+              "projects/budega/src/favicon.ico",
+              "projects/budega/src/assets"
             ],
             "styles": [
-              "projects/angular-ngrx-material-starter/src/styles-app-loading.scss",
-              "projects/angular-ngrx-material-starter/src/styles.scss"
+              "projects/budega/src/styles-app-loading.scss",
+              "projects/budega/src/styles.scss"
             ],
             "scripts": []
           },
@@ -117,8 +117,8 @@
             "test": {
               "fileReplacements": [
                 {
-                  "replace": "projects/angular-ngrx-material-starter/src/environments/environment.ts",
-                  "with": "projects/angular-ngrx-material-starter/src/environments/environment.test.ts"
+                  "replace": "projects/budega/src/environments/environment.ts",
+                  "with": "projects/budega/src/environments/environment.test.ts"
                 }
               ]
             }
@@ -128,9 +128,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/angular-ngrx-material-starter/tsconfig.app.json",
-              "projects/angular-ngrx-material-starter/tsconfig.spec.json",
-              "projects/angular-ngrx-material-starter/e2e/tsconfig.json"
+              "projects/budega/tsconfig.app.json",
+              "projects/budega/tsconfig.spec.json",
+              "projects/budega/e2e/tsconfig.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
@@ -138,20 +138,21 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/angular-ngrx-material-starter/e2e/protractor.conf.js",
-            "devServerTarget": "angular-ngrx-material-starter:serve"
+            "protractorConfig": "projects/budega/e2e/protractor.conf.js",
+            "devServerTarget": "budega:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-ngrx-material-starter:serve:production"
+              "devServerTarget": "budega:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "angular-ngrx-material-starter",
+  "defaultProject": "budega",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@ngrx/schematics"
   }
 }
