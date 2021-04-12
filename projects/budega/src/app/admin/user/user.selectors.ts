@@ -1,17 +1,17 @@
 import { createSelector } from '@ngrx/store';
 import { BudegaUser } from './models/models';
 
-export interface UserState {
-  usersList: BudegaUser[];
+export interface BudegaUserState {
+  budegaUserList: BudegaUser[];
 }
 
 export interface AppState {
-  user: UserState;
+  user: BudegaUserState;
 }
 
-export const selectUsers = (state: AppState) => state.user;
+export const selectBudegaUsers = (state: AppState) => state.user;
 
-export const selectUsersList = createSelector(
-  selectUsers,
-  (state: UserState) => state.usersList
+export const selectBudegaUserList = createSelector(
+  selectBudegaUsers,
+  (state: BudegaUserState) => state.budegaUserList
 );

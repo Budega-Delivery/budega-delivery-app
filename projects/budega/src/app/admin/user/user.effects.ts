@@ -2,25 +2,45 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from '../../service/user/user.service';
 import { UserActionsTypes } from './UserActionsTypes';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
-import { ProductsActionsTypes } from '../product/productsActionsTypes';
+import { catchError, exhaustMap, map, switchMap } from 'rxjs/operators';
 import { LoadingBarActionTypes } from '../../shared/loading-bar/loadingBarActionsTypes';
 import { NotificationService } from '../../core/notifications/notification.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class UserEffects {
-  registerClient$ = createEffect(() =>
+  registerBudegaUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActionsTypes.userClientRegister),
-      exhaustMap(({ client }) =>
+      ofType(UserActionsTypes.budegaUserRegister),
+      switchMap(({ client }) =>
         this.userService.addUserClient(client).pipe(
-          map(() => ({ type: UserActionsTypes.userClientRegisterSuccess })),
-          catchError(
-            map((err) => ({
-              type: UserActionsTypes.userClientRegisterFailure,
+          map(() => ({ type: UserActionsTypes.budegaUserRegisterSuccess })),
+          catchError((err) =>
+            of({
+              type: UserActionsTypes.budegaUserRegisterFailure,
               err
-            }))
+            })
+          )
+        )
+      )
+    )
+  );
+
+  loadBudegaUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActionsTypes.loadBudegaUsers),
+      switchMap(() =>
+        this.userService.getUserList().pipe(
+          map((budegaUserList) => ({
+            type: UserActionsTypes.loadBudegaUsersSuccess,
+            budegaUserList
+          })),
+          catchError((error) =>
+            of({
+              type: UserActionsTypes.loadBudegaUsersFailure,
+              error
+            })
           )
         )
       )
@@ -29,26 +49,26 @@ export class UserEffects {
 
   /* Notifications */
 
-  registerClientSuccessNotification$ = createEffect(
+  registerBudegaUserSuccessNotification$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(ProductsActionsTypes.addProductSuccessAction),
+        ofType(UserActionsTypes.budegaUserRegisterSuccess),
         map(() =>
           this.translateService
-            .get('budega.client.register.success')
+            .get('budega.user.register.success')
             .subscribe((res) => this.notificationService.success(res))
         )
       ),
     { dispatch: false }
   );
 
-  registerClientFailureNotification$ = createEffect(
+  registerBudegaUserFailureNotification$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(ProductsActionsTypes.addProductSuccessAction),
+        ofType(UserActionsTypes.budegaUserRegisterFailure),
         map(() =>
           this.translateService
-            .get('budega.client.register.failure')
+            .get('budega.user.register.failure')
             .subscribe((res) => this.notificationService.success(res))
         )
       ),
@@ -59,7 +79,10 @@ export class UserEffects {
 
   showLoadingBar$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActionsTypes.userClientRegister, UserActionsTypes.loadUsers),
+      ofType(
+        UserActionsTypes.budegaUserRegister,
+        UserActionsTypes.loadBudegaUsers
+      ),
       map(() => ({
         type: LoadingBarActionTypes.showIndeterminateLoading
       }))
@@ -69,10 +92,10 @@ export class UserEffects {
   hideLoadingBar$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        UserActionsTypes.userClientRegisterSuccess,
-        UserActionsTypes.userClientRegisterFailure,
-        UserActionsTypes.loadUsersSuccess,
-        UserActionsTypes.loadUsersFailure
+        UserActionsTypes.budegaUserRegisterSuccess,
+        UserActionsTypes.budegaUserRegisterFailure,
+        UserActionsTypes.loadBudegaUsersSuccess,
+        UserActionsTypes.loadBudegaUsersFailure
       ),
       map(() => ({ type: LoadingBarActionTypes.hideIndeterminateLoading }))
     )

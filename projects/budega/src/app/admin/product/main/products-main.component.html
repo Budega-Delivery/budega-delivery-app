@@ -1,6 +1,7 @@
 <div class='container'>
   <div class="columns">
     <h1>{{'budega.products' | translate }}</h1>
+
     <form [formGroup]="form" (ngSubmit)="submit()">
       <div class="row">
         <mat-form-field class="col-md-3" [ngClass]="routeAnimationsElements">
@@ -15,6 +16,7 @@
         </button>
       </div>
     </form>
+
   <ng-container *ngIf="productList$ | ngrxPush; let list; let e = $error, let c = $complete">
     <div class='product-list'>
     <budega-product-list  [productList]="list"  *ngIf="list.length" >

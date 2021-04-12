@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-shadow
 export enum UserActionsTypes {
-  loadUsers = '[User] Load Users Failure',
-  loadUsersSuccess = '[User] Load Users Success',
-  loadUsersFailure = '[User] Load Users Failure',
+  loadBudegaUsers = '[User] Load Users',
+  loadBudegaUsersSuccess = '[User] Load Budega Users Success',
+  loadBudegaUsersFailure = '[User] Load Budega Users Failure',
 
-  userClientRegister = '[User] Client Register',
-  userClientRegisterSuccess = '[User] Register Client Success',
-  userClientRegisterFailure = '[User] Register Client Failure'
+  budegaUserRegister = '[User] Budega User Register',
+  budegaUserRegisterSuccess = '[User] Register Budega User Success',
+  budegaUserRegisterFailure = '[User] Register Budega User Failure'
 }

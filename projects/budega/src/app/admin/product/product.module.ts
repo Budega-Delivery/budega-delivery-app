@@ -9,7 +9,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { productFeatureKey, productReducer } from './product.reducer';
-import { ReactiveComponentModule } from '@ngrx/component';
 import { BrandDialogComponent } from './brand-dialog/brand-dialog.component';
 import { DepartmentDialogComponent } from './department-dialog/department-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -35,7 +34,6 @@ const maskConfig: Partial<IConfig> = {
     EffectsModule.forFeature([ProductEffects]),
     NgxMaskModule.forRoot(maskConfig),
     RouterModule,
-    ReactiveComponentModule,
     MatDialogModule,
     MatAutocompleteModule
   ],

@@ -72,5 +72,7 @@ export class ProductListComponent implements AfterViewInit, OnInit {
     this.table.dataSource = this.dataSource;
   }
 
-  remove(_id: string) {}
+  remove(_id: string) {
+    // TODO: Implement this
+  }
 }

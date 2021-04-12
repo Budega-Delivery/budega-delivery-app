@@ -5,6 +5,7 @@ import { EditProductComponent } from './product/product/edit-product.component';
 import { ProductsMainComponent } from './product/main/products-main.component';
 import { AuthGuardService } from '../core/keycloak/auth-guard.service';
 import { Product } from './product/models/models';
+import { UsersMainComponent } from './user/main/users-main.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     data: {
       title: 'budega.admin.products',
-      roles: ['manager']
+      roles: ['manager', 'stockist']
     }
   },
   {
@@ -36,10 +37,29 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     data: {
       title: 'budega.admin.product',
-      roles: ['manager'],
+      roles: ['manager', 'stockist'],
       product: Product
     }
+  },
+  {
+    path: 'usuarios',
+    component: UsersMainComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      title: 'budega.admin.users',
+      roles: ['manager']
+    }
   }
+  // {
+  //   path: 'usuarios/:id',
+  //   component: EditUserComponent,
+  //   canActivate: [AuthGuardService],
+  //   data: {
+  //     title: 'budega.admin.product',
+  //     roles: ['manager', 'stockist'],
+  //     product: Product
+  //   }
+  // }
 ];
 
 @NgModule({

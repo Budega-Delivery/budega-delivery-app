@@ -1,0 +1,16 @@
+<div class='container'>
+  <div class="columns">
+    <h1>{{'budega.users' | translate }}</h1>
+
+    <ng-container *ngIf="userList$ | ngrxPush; let list; let e = $error, let c = $complete">
+      <div class='user-list'>
+
+        <budega-user-list  [userList]="list"  *ngIf="list.length" >
+        </budega-user-list>
+      </div>
+      <ng-container *ngIf="!list.length">
+        <p><strong>{{'budega.user.emptylist' | translate }}</strong><br>{{'budega.user.addnew' | translate }}</p>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

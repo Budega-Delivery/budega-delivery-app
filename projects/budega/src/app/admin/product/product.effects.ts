@@ -4,13 +4,13 @@ import {
   catchError,
   exhaustMap,
   map,
-  mapTo,
   mergeMap,
+  switchMap,
   tap
 } from 'rxjs/operators';
 import { ProductsActionsTypes } from './productsActionsTypes';
 import { Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { LoadingBarActionTypes } from '../../shared/loading-bar/loadingBarActionsTypes';
 import { NotificationService } from '../../core/notifications/notification.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,17 +24,17 @@ export class ProductEffects {
   loadProductList$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductsActionsTypes.loadProductsAction),
-      mergeMap(() =>
+      switchMap(() =>
         this.productService.getProductList().pipe(
           map((productList) => ({
             type: ProductsActionsTypes.loadProductsSuccessAction,
             productList
           })),
           catchError((error) =>
-            map(() => ({
+            of({
               type: ProductsActionsTypes.loadProductsFailureAction,
               error
-            }))
+            })
           )
         )
       )
@@ -44,17 +44,17 @@ export class ProductEffects {
   createProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductsActionsTypes.addProductAction),
-      exhaustMap(({ newProduct }) =>
+      switchMap(({ newProduct }) =>
         this.productService.addProduct(newProduct).pipe(
           map((productId) => ({
             type: ProductsActionsTypes.addProductSuccessAction,
             productId
           })),
           catchError((error) =>
-            map(() => ({
+            of({
               type: ProductsActionsTypes.addProductFailureAction,
               error
-            }))
+            })
           )
         )
       )
@@ -65,16 +65,16 @@ export class ProductEffects {
   removeProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductsActionsTypes.removeProductAction),
-      exhaustMap(({ productId }) =>
+      switchMap(({ productId }) =>
         this.productService.removeProduct(productId).pipe(
           map(() => ({
             type: ProductsActionsTypes.removeProductSuccessAction
           })),
           catchError((error) =>
-            map(() => ({
+            of({
               type: ProductsActionsTypes.removeProductFailureAction,
               error
-            }))
+            })
           )
         )
       )
@@ -113,7 +113,7 @@ export class ProductEffects {
   loadProductToUpdate$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductsActionsTypes.loadProductToUpdateAction),
-      mergeMap(({ id }) =>
+      switchMap(({ id }) =>
         forkJoin({
           product: this.productService.getProductByID(id),
           departments: this.productDepartmentService.getProductDepartmentList(),
@@ -125,10 +125,10 @@ export class ProductEffects {
             editingProduct
           })),
           catchError((error) =>
-            map(() => ({
+            of({
               type: ProductsActionsTypes.loadProductToUpdateFailureAction,
               error
-            }))
+            })
           )
         )
       )
@@ -138,17 +138,17 @@ export class ProductEffects {
   updateProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductsActionsTypes.updateProductAction),
-      exhaustMap(({ product }) =>
+      switchMap(({ product }) =>
         this.productService.updateProduct(product).pipe(
           map(
             () => ({
               type: ProductsActionsTypes.updateProductSuccessAction
             }),
             catchError((error) =>
-              map(() => ({
+              of({
                 type: ProductsActionsTypes.updateProductFailureAction,
                 error
-              }))
+              })
             )
           )
         )
@@ -159,17 +159,17 @@ export class ProductEffects {
   updateProductImage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductsActionsTypes.updateProductImageAction),
-      exhaustMap(({ product, image }) =>
+      switchMap(({ product, image }) =>
         this.productService.updateProductImage(product, image).pipe(
           map(
             () => ({
               type: ProductsActionsTypes.updateProductImageSuccessAction
             }),
             catchError((error) =>
-              map(() => ({
+              of({
                 type: ProductsActionsTypes.updateProductImageFailureAction,
                 error
-              }))
+              })
             )
           )
         )

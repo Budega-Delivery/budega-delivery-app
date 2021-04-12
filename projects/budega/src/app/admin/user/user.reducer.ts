@@ -1,29 +1,33 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { BudegaUser } from './models/models';
 import { HttpErrorResponse } from '@angular/common/http';
-import { loadUsers, loadUsersSuccess, loadUsersFailure } from './user.actions';
+import {
+  loadBudegaUsers,
+  loadBudegaUsersFailure,
+  loadBudegaUsersSuccess
+} from './user.actions';
 
 export const userFeatureKey = 'user';
 
 export interface State {
-  usersList: BudegaUser[];
+  budegaUserList: BudegaUser[];
   error?: HttpErrorResponse;
 }
 
 export const initialState: State = {
-  usersList: []
+  budegaUserList: []
 };
 
 export const reducer = createReducer(
   initialState,
-  on(loadUsers, (state) => state),
-  on(loadUsersSuccess, (state, { usersList }) => ({
+  on(loadBudegaUsers, (state) => state),
+  on(loadBudegaUsersSuccess, (state, { budegaUserList }) => ({
     ...state,
-    usersList: usersList
+    budegaUserList: budegaUserList
   })),
-  on(loadUsersFailure, (state, { error }) => ({
+  on(loadBudegaUsersFailure, (state, { error }) => ({
     ...state,
-    error: error
+    error
   }))
 );
 

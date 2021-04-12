@@ -45,8 +45,19 @@ export class AppComponent implements OnInit {
   sideNavOpened = true;
   languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
   navigation = [
-    { link: 'loja', label: 'Loja', roles: ['client', 'public'] },
-    { link: 'admin/produtos', label: 'Produtos', roles: ['manager'] }
+    { link: 'loja', label: 'budega.menu.store', roles: ['client', 'public'] },
+    {
+      link: 'admin/produtos',
+      label: 'budega.menu.products',
+      roles: ['manager', 'stockist']
+    },
+    { link: 'admin/painel', label: 'budega.menu.manager', roles: ['manager'] },
+    { link: 'admin/usuarios', label: 'budega.menu.users', roles: ['manager'] },
+    {
+      link: 'admin/deliveries',
+      label: 'budega.menu.deliveries',
+      roles: ['manager', 'deliveryman', 'stockist']
+    }
   ];
   navigationSideMenu = [
     ...this.navigation,

@@ -79,6 +79,7 @@ import {
   loadingBarReducer
 } from './loading-bar/loading-bar.reducer';
 import { LoadingBarComponent } from './loading-bar/components/loading-bar/loading-bar.component';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
   imports: [
@@ -111,6 +112,7 @@ import { LoadingBarComponent } from './loading-bar/components/loading-bar/loadin
     MatSliderModule,
     MatNativeDateModule,
     MatSortModule,
+    ReactiveComponentModule,
 
     FontAwesomeModule,
 
@@ -153,6 +155,7 @@ import { LoadingBarComponent } from './loading-bar/components/loading-bar/loadin
     MatSliderModule,
     MatNativeDateModule,
     MatSortModule,
+    ReactiveComponentModule,
 
     FontAwesomeModule,
 

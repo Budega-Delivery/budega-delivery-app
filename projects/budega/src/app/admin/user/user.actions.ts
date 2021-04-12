@@ -1,28 +1,28 @@
 import { createAction, props } from '@ngrx/store';
 import { UserActionsTypes } from './UserActionsTypes';
-import { ClientUser, BudegaUser } from './models/models';
+import { BudegaUser } from './models/models';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export const loadUsers = createAction(UserActionsTypes.loadUsers);
+export const loadBudegaUsers = createAction(UserActionsTypes.loadBudegaUsers);
 
-export const loadUsersSuccess = createAction(
-  UserActionsTypes.loadUsersSuccess,
-  props<{ usersList: BudegaUser[] }>()
+export const loadBudegaUsersSuccess = createAction(
+  UserActionsTypes.loadBudegaUsersSuccess,
+  props<{ budegaUserList: BudegaUser[] }>()
 );
 
-export const loadUsersFailure = createAction(
-  UserActionsTypes.loadUsersFailure,
+export const loadBudegaUsersFailure = createAction(
+  UserActionsTypes.loadBudegaUsersFailure,
   props<{ error: HttpErrorResponse }>()
 );
 
-export const userClientRegister = createAction(
-  UserActionsTypes.userClientRegister,
-  props<{ client: ClientUser }>()
+export const budegaUserRegister = createAction(
+  UserActionsTypes.budegaUserRegister,
+  props<{ budegaUser: BudegaUser }>()
 );
 
-export const userClientRegisterSuccess = createAction(
-  UserActionsTypes.userClientRegisterSuccess
+export const budegaUserRegisterSuccess = createAction(
+  UserActionsTypes.budegaUserRegisterSuccess
 );
-export const userClientRegisterFailure = createAction(
-  UserActionsTypes.userClientRegisterFailure
+export const budegaUserRegisterFailure = createAction(
+  UserActionsTypes.budegaUserRegisterFailure
 );

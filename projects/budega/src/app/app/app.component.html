@@ -10,10 +10,10 @@
       <mat-divider style="margin-top: 1rem;"></mat-divider>
       <mat-nav-list>
         <div *ngFor="let item of navigationSideMenu">
-        <a mat-list-item  (click)="this.isSmallScreen ? sidenav.close() : null" [routerLink]="[item.link]"
-          routerLinkActive="active" *budegaHasRole="item.roles">
-          {{item.label | translate}}
-        </a>
+          <a mat-list-item  (click)="this.isSmallScreen ? sidenav.close() : null" [routerLink]="[item.link]"
+            routerLinkActive="active" *budegaHasRole="item.roles">
+            {{item.label | translate}}
+          </a>
         </div>
       </mat-nav-list>
     </mat-sidenav>
@@ -38,13 +38,11 @@
           <span class="spacer"></span>
           <span *ngIf="sideNavOpened" class="spacer"></span>
 
-          <span class="d-none d-md-inline">
-            <div *ngFor="let item of navigation">
+          <span class="d-none d-md-inline" *ngFor="let item of navigation">
             <button mat-button class="nav-button"  [routerLink]="[item.link]"
               routerLinkActive="active" *budegaHasRole='item.roles'>
               {{item.label | translate}}
             </button>
-              </div>
           </span>
 
           <button mat-button mat-stroked-button color="accent" *ngIf="!(isAuthenticated$ | async)"

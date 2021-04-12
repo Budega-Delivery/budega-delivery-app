@@ -2,18 +2,6 @@ import { createAction, props } from '@ngrx/store';
 import { PublicActionsTypes } from './PublicActionsTypes';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ClientUser } from '../admin/user/models/models';
-//
-// export const loadUsers = createAction(PublicActionsTypes.loadUsers);
-//
-// export const loadUsersSuccess = createAction(
-//   PublicActionsTypes.loadUsersSuccess,
-//   props<{ usersList: BudegaUser[] }>()
-// );
-//
-// export const loadUsersFailure = createAction(
-//   PublicActionsTypes.loadUsersFailure,
-//   props<{ error: HttpErrorResponse }>()
-// );
 
 export const userClientRegister = createAction(
   PublicActionsTypes.userClientRegister,
