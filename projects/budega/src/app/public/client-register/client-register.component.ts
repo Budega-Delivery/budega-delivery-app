@@ -17,6 +17,7 @@ export class ClientRegisterComponent implements OnInit {
     firstName: ['', [Validators.required, Validators.minLength(4)]],
     lastName: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]]
+    // password: ['', [Validators.required]]
   });
 
   constructor(private fb: FormBuilder, private userStore: Store<AppState>) {}

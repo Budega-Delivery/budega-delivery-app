@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EditProductComponent } from './product/edit-product.component';
 import { ProductsMainComponent } from './main/products-main.component';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './product.effects';
@@ -14,6 +13,7 @@ import { DepartmentDialogComponent } from './department-dialog/department-dialog
 import { MatDialogModule } from '@angular/material/dialog';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: true
@@ -21,7 +21,7 @@ const maskConfig: Partial<IConfig> = {
 
 @NgModule({
   declarations: [
-    EditProductComponent,
+    ProductEditComponent,
     ProductsMainComponent,
     ProductListComponent,
     BrandDialogComponent,
@@ -37,7 +37,7 @@ const maskConfig: Partial<IConfig> = {
     MatDialogModule,
     MatAutocompleteModule
   ],
-  exports: [ProductListComponent],
+  exports: [ProductListComponent, ProductEditComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProductModule {}

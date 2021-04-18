@@ -1,10 +1,30 @@
 // eslint-disable-next-line no-shadow
 export enum UserActionsTypes {
-  loadBudegaUsers = '[User] Load Users',
-  loadBudegaUsersSuccess = '[User] Load Budega Users Success',
-  loadBudegaUsersFailure = '[User] Load Budega Users Failure',
+  loadBudegaUsersAction = '[BudegaUser] Load Users',
+  loadBudegaUsersSuccessAction = '[BudegaUser] Load Budega Users Success',
+  loadBudegaUsersFailureAction = '[BudegaUser] Load Budega Users Failure',
 
-  budegaUserRegister = '[User] Budega User Register',
-  budegaUserRegisterSuccess = '[User] Register Budega User Success',
-  budegaUserRegisterFailure = '[User] Register Budega User Failure'
+  registerBudegaUserAction = '[BudegaUser] Budega User Register',
+  registerBudegaUserSuccessAction = '[BudegaUser] Register Budega User Success',
+  registerBudegaUserFailureAction = '[BudegaUser] Register Budega User Failure',
+
+  loadBudegaUserToUpdateAction = '[BudegaUser] Load User to Update',
+  loadBudegaUserToUpdateSuccessAction = '[BudegaUser] Load Budega User to Update Success',
+  loadBudegaUserToUpdateFailureAction = '[BudegaUser] Load Budega User to Update Failure',
+
+  removeBudegaUserAction = '[BudegaUser] Remove BudegaUser',
+  removeBudegaUserSuccessAction = '[BudegaUser] Remove Budega User Success',
+  removeBudegaUserFailureAction = '[BudegaUser] Remove Budega User Failure',
+
+  updateBudegaUserAction = '[BudegaUser] Update BudegaUser',
+  updateBudegaUserSuccessAction = '[BudegaUser] Update Budega User Success',
+  updateBudegaUserFailureAction = '[BudegaUser] Update Budega User Failure',
+
+  updateBudegaUserImageAction = '[BudegaUser] Update Budega User Image',
+  updateBudegaUserImageSuccessAction = '[BudegaUser] Update Budega User Image Success',
+  updateBudegaUserImageFailureAction = '[BudegaUser] Update BudegaU ser Image Failure',
+
+  loadBudegaUserRoleListAction = '[BudegaUser Role] Load Budega User Role List',
+  loadBudegaUserRoleListSuccessAction = '[BudegaUser Role] Load Budega User Role List Success',
+  loadBudegaUserRoleListFailureAction = '[BudegaUser Role] Load Budega User Role List Failure'
 }

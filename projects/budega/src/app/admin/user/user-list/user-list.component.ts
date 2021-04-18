@@ -12,6 +12,7 @@ import { MatTable } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { BudegaUser } from '../models/models';
 import { UserListDataSource } from './user-list-datasource';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'budega-user-list',
@@ -23,6 +24,7 @@ export class UserListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<BudegaUser>;
+  // @ViewChild('activeToggle') activeToggle: MatSlideToggle;
   @Input() userList: BudegaUser[];
   dataSource: UserListDataSource;
   translate: TranslateService;
@@ -61,7 +63,9 @@ export class UserListComponent implements AfterViewInit, OnInit {
     this.table.dataSource = this.dataSource;
   }
 
-  remove(_id: string) {}
+  remove(id: string) {}
+
+  inactive(id: string) {}
 
   // TODO: ativar e desativar usuário
   // TODO: criar página de ediçao

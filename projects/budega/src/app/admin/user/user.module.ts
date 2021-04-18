@@ -10,9 +10,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
-  declarations: [UsersMainComponent, UserListComponent],
+  declarations: [UsersMainComponent, UserListComponent, UserEditComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature(userFeatureKey, userReducer),
@@ -22,6 +23,6 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     RouterModule
   ],
-  exports: [UserListComponent]
+  exports: [UserListComponent, UserEditComponent]
 })
 export class UserModule {}

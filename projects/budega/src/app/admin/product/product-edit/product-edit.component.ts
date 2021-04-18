@@ -38,11 +38,11 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'budega-edit-product',
-  templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.scss'],
+  templateUrl: './product-edit.component.html',
+  styleUrls: ['./product-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditProductComponent implements AfterViewInit {
+export class ProductEditComponent implements AfterViewInit {
   @ViewChild('fileInput') fileInput: HTMLInputElement;
   @ViewChild('categoriesInput') categoriesInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
