@@ -5,6 +5,11 @@
   "budega.menu.register": "Registrar",
   "budega.menu.logout": "Sair",
   "budega.menu.settings": "Configurações",
+  "budega.menu.manager": "Gerenciamento",
+  "budega.menu.products": "Produtos",
+  "budega.menu.users": "Usuários",
+  "budega.menu.store": "Loja",
+  "budega.menu.deliveries": "Entregas",
 
   "budega.settings.animations.elements": "Elementos de navegação deslizam para cima",
   "budega.settings.animations.page": "Navegação com transição em toda pagina",
@@ -52,6 +57,15 @@
   "budega.categories": "Categorias",
   "budega.cancel": "Cancelar",
   "budega.description": "Descrição",
+  "budega.disabled": "Desabilitado",
+  "budega.enabled": "Habilitado",
+  "budega.createdAt": "Data de criação",
+  "budega.edit": "Editar",
+  "budega.role": "Perfil",
+  "budega.role.manager": "Gerente",
+  "budega.role.stockist": "Estoquista",
+  "budega.role.client": "Cliente",
+  "budega.role.deliveryman": "Entregador",
 
   "budega.table.itemsperpagelabel": "Itens por página",
   "budega.table.firstpagelabel": "Primeira página",
@@ -86,5 +100,11 @@
   "budega.product.remove.success": "Produto removido com sucesso",
   "budega.product.remove.failure": "Erro ao remover o produto. Contacte o suporte!",
   "budega.product.update.image.success": "Imagem do produto atualizada com sucesso!",
-  "budega.product.image.failure": "Erro ao atualizar imagem do produto. Contacte o suporte!"
+  "budega.product.image.failure": "Erro ao atualizar imagem do produto. Contacte o suporte!",
+  "budega.product.emptylist": "Nenhum produto cadastrado!",
+  "budega.product.addnew": "Vamos começar, adicione um novo produto!",
+
+  "budega.users": "Usuários",
+  "budega.user.emptylist": "Lista de usuários vazia",
+  "budega.user.addnew": "Adicione um novo usuário"
 }
