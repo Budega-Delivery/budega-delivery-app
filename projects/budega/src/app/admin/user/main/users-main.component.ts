@@ -17,8 +17,8 @@ export class UsersMainComponent implements OnInit {
   userList$: Observable<BudegaUser[]>;
 
   constructor(private userStore: Store<AppState>) {
+    // TODO: Add button to Create User and Create user view
     this.userList$ = this.userStore.select(selectBudegaUserList);
-    this.userList$.subscribe((res) => console.log(res));
   }
 
   ngOnInit(): void {

@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EditProductComponent } from '../product/edit-product.component';
 import { ProductBrand, ProductDepartment } from '../models/models';
+import { ProductEditComponent } from '../product-edit/product-edit.component';
 
 @Component({
   selector: 'budega-department-dialog',
@@ -26,7 +26,7 @@ export class DepartmentDialogComponent implements OnInit {
   });
 
   constructor(
-    public dialogRef: MatDialogRef<EditProductComponent>,
+    public dialogRef: MatDialogRef<ProductEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductDepartment,
     private fb: FormBuilder
   ) {}

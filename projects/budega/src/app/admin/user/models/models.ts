@@ -21,4 +21,5 @@ export class BudegaUser {
   username: string;
   emailVerified: boolean;
   enabled: boolean;
+  attributes: Record<string, string>;
 }

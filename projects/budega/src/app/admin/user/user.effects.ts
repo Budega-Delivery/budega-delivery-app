@@ -6,7 +6,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { LoadingBarActionTypes } from '../../shared/loading-bar/loadingBarActionsTypes';
 import { NotificationService } from '../../core/notifications/notification.service';
 import { TranslateService } from '@ngx-translate/core';
-import { of } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 
 @Injectable()
 export class UserEffects {
@@ -49,6 +49,50 @@ export class UserEffects {
     )
   );
 
+  loadBudegaUserToUpdate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActionsTypes.loadBudegaUserToUpdateAction),
+      switchMap(({ id }) =>
+        forkJoin({
+          roles: this.userService.getRoles(),
+          budegaUser: this.userService.getUserById(id)
+        }).pipe(
+          map((editingBudegaUser) => ({
+            type: UserActionsTypes.loadBudegaUserToUpdateSuccessAction,
+            editingBudegaUser
+          })),
+          catchError((error) =>
+            of({
+              type: UserActionsTypes.loadBudegaUserToUpdateFailureAction,
+              error
+            })
+          )
+        )
+      )
+    )
+  );
+
+  updateBudegaUserImage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActionsTypes.updateBudegaUserImageAction),
+      switchMap(({ budegaUser, image }) =>
+        this.userService.updateBudegaUserImage(budegaUser, image).pipe(
+          map(
+            () => ({
+              type: UserActionsTypes.updateBudegaUserImageSuccessAction
+            }),
+            catchError((error) =>
+              of({
+                type: UserActionsTypes.updateBudegaUserImageFailureAction,
+                error
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   /* Notifications */
 
   registerBudegaUserSuccessNotification$ = createEffect(
@@ -68,6 +112,38 @@ export class UserEffects {
     () =>
       this.actions$.pipe(
         ofType(UserActionsTypes.registerBudegaUserFailureAction),
+        map(() =>
+          this.translateService
+            .get('budega.user.register.failure')
+            .subscribe((res) => this.notificationService.success(res))
+        )
+      ),
+    { dispatch: false }
+  );
+
+  updateBudegaUserSuccessNotification$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          UserActionsTypes.updateBudegaUserSuccessAction,
+          UserActionsTypes.updateBudegaUserImageSuccessAction
+        ),
+        map(() =>
+          this.translateService
+            .get('budega.user.update.success')
+            .subscribe((res) => this.notificationService.success(res))
+        )
+      ),
+    { dispatch: false }
+  );
+
+  updateBudegaUserFailureNotification$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          UserActionsTypes.updateBudegaUserFailureAction,
+          UserActionsTypes.updateBudegaUserImageFailureAction
+        ),
         map(() =>
           this.translateService
             .get('budega.user.register.failure')
@@ -98,10 +174,15 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(
         UserActionsTypes.registerBudegaUserSuccessAction,
-        UserActionsTypes.registerBudegaUserFailureAction,
         UserActionsTypes.loadBudegaUsersSuccessAction,
-        UserActionsTypes.loadBudegaUserToUpdateFailureAction,
+        UserActionsTypes.loadBudegaUserToUpdateSuccessAction,
         UserActionsTypes.updateBudegaUserSuccessAction,
+        UserActionsTypes.updateBudegaUserImageSuccessAction,
+        /* failures */
+        UserActionsTypes.registerBudegaUserFailureAction,
+        UserActionsTypes.loadBudegaUsersFailureAction,
+        UserActionsTypes.loadBudegaUserToUpdateFailureAction,
+        UserActionsTypes.updateBudegaUserFailureAction,
         UserActionsTypes.updateBudegaUserImageFailureAction
       ),
       map(() => ({ type: LoadingBarActionTypes.hideIndeterminateLoading }))

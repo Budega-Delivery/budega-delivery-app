@@ -11,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/animations/route.animations';
-import { MatDialog } from '@angular/material/dialog';
 import { filter } from 'rxjs/operators';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { Image } from '../../product/models/models';
@@ -23,6 +22,9 @@ import {
   updateBudegaUser,
   updateBudegaUserImage
 } from '../user.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { CropperImageDialogComponent } from '../../../shared/cropper-image-dialog/cropper-image-dialog.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'budega-edit-product',
@@ -33,22 +35,23 @@ import {
 export class UserEditComponent implements AfterViewInit {
   @ViewChild('fileInput') fileInput: HTMLInputElement;
   @ViewChild('activeToggle') activeToggle: MatSlideToggle;
+  @ViewChild('userImage') userImage: ElementRef<HTMLImageElement>;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
   id: string;
   edit$: Observable<any>;
   roleListSelector: Array<Role> = [];
-  roleList: Array<Role> = [];
   form: FormGroup;
   imageData: FormData = undefined;
+  userImageUrl: string;
   image: Image;
+  api = environment.api.url;
 
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    public departmentDialog: MatDialog,
-    public brandDialog: MatDialog
+    public copperImageDialog: MatDialog
   ) {
     const id = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(loadBudegaUserToUpdate({ id }));
@@ -58,29 +61,38 @@ export class UserEditComponent implements AfterViewInit {
     );
     this.form = fb.group({
       active: [false],
-      id: [''],
+      id: ['', [Validators.required]],
       username: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      role: [null],
+      role: [null, [Validators.required]],
       image: [null]
     });
   }
 
   ngAfterViewInit(): void {
-    this.edit$.subscribe(({ user, roles }) => {
+    this.edit$.subscribe(({ roles, budegaUser }) => {
       this.roleListSelector = roles;
-      for (const [k, v] of Object.entries(user)) {
+      for (const [k, v] of Object.entries(budegaUser)) {
         if (this.form.controls[k]) this.form.controls[k].setValue(v);
         if (k === 'image') this.image = (v as unknown) as Image;
-        if (k === 'categories') this.roleList = (v as unknown) as Role[];
+        if (k === 'clientRoles') this.form.controls['role'].setValue(v[0]);
       }
+      if (budegaUser.attributes && budegaUser.attributes.avatar)
+        this.userImageUrl = `${this.api}/${budegaUser.attributes.avatar}`;
     });
+
     this.form.controls['active'].valueChanges.subscribe(() =>
       this.canBeActive()
     );
   }
+
+  /*
+   * TODO: ADD BUTTON TO REQUIRE RESET PASSWORD
+   * TODO: ADD BUTTON TO RE-CHECK EMAIL
+   * TODO: ADD VIEW TO EMAIL VERIFIED
+   *  */
 
   save() {
     if (this.form.valid) {
@@ -96,7 +108,7 @@ export class UserEditComponent implements AfterViewInit {
       );
   }
 
-  removeProduct() {
+  removeUser() {
     // add confirm dialog
     this.store.dispatch(
       removeBudegaUser({ budegaUserId: this.form.controls['id'].value })
@@ -107,32 +119,34 @@ export class UserEditComponent implements AfterViewInit {
     // verify minimum to be active
     // show warning if cant be active
     // if be active show success and active
-    // if (!this.activeToggle) return;
-    // if (
-    //   !(
-    //     this.form.valid &&
-    //     this.form.controls['price'].value > 0 &&
-    //     this.form.controls['stockAmount'].value > 0 &&
-    //     this.form.controls['stockMinimumAlert'].value > 0 &&
-    //     this.form.controls['brand'].value !== undefined &&
-    //     this.form.controls['department'].value !== undefined
-    //   )
-    // ) {
-    //   this.activeToggle.checked = false;
-    //   console.log('cant be active');
-    // }
-  }
-
-  onFileChange(event: Event) {
-    const file = ((event.target as unknown) as HTMLInputElement).files[0];
-    if (file) {
-      this.imageData = new FormData();
-      this.imageData.append('image', file, file.name);
+    if (!this.activeToggle) return;
+    if (!this.form.valid) {
+      this.activeToggle.checked = false;
+      console.log('cant be active');
     }
   }
 
+  onFileChange(event: InputEvent) {
+    const dialogRef = this.copperImageDialog.open(CropperImageDialogComponent, {
+      data: { event }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.userImage.nativeElement.src = URL.createObjectURL(result);
+        this.userImage.nativeElement.hidden = false;
+        this.imageData = new FormData();
+        this.imageData.append(
+          'image',
+          result,
+          this.form.controls['username'].value
+        );
+      }
+    });
+  }
+
   removeImage() {
-    // remove Image
+    // TODO: add icon to remove image
   }
 
   customCompare(o1, o2) {

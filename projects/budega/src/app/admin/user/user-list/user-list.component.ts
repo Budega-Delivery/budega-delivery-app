@@ -12,7 +12,7 @@ import { MatTable } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { BudegaUser } from '../models/models';
 import { UserListDataSource } from './user-list-datasource';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'budega-user-list',
@@ -28,8 +28,18 @@ export class UserListComponent implements AfterViewInit, OnInit {
   @Input() userList: BudegaUser[];
   dataSource: UserListDataSource;
   translate: TranslateService;
+  api = environment.api.url;
 
-  displayedColumns = ['created', 'name', 'email', 'role', 'active', 'actions'];
+  displayedColumns = [
+    'created',
+    'name',
+    'image',
+    'email',
+    'role',
+    'emailVerified',
+    'active',
+    'actions'
+  ];
 
   constructor(translate: TranslateService) {
     this.translate = translate;
@@ -68,6 +78,6 @@ export class UserListComponent implements AfterViewInit, OnInit {
   inactive(id: string) {}
 
   // TODO: ativar e desativar usuário
-  // TODO: criar página de ediçao
   // TODO: criar método de remoção
+  // TODO: confirm dialog para remoção
 }

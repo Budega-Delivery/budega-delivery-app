@@ -47,6 +47,7 @@ export class ProductEditComponent implements AfterViewInit {
   @ViewChild('categoriesInput') categoriesInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   @ViewChild('activeToggle') activeToggle: MatSlideToggle;
+  @ViewChild('productImage') productImage: ElementRef<HTMLImageElement>;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
   id: string;
@@ -194,6 +195,8 @@ export class ProductEditComponent implements AfterViewInit {
   onFileChange(event: Event) {
     const file = ((event.target as unknown) as HTMLInputElement).files[0];
     if (file) {
+      this.productImage.nativeElement.src = URL.createObjectURL(file);
+      this.productImage.nativeElement.alt = file.name;
       this.imageData = new FormData();
       this.imageData.append('image', file, file.name);
     }

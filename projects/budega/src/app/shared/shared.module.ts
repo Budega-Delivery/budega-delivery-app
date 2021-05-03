@@ -80,6 +80,9 @@ import {
 } from './loading-bar/loading-bar.reducer';
 import { LoadingBarComponent } from './loading-bar/components/loading-bar/loading-bar.component';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { CropperImageDialogComponent } from './cropper-image-dialog/cropper-image-dialog.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -116,13 +119,16 @@ import { ReactiveComponentModule } from '@ngrx/component';
 
     FontAwesomeModule,
 
-    StoreModule.forFeature(loadingBarFeatureKey, loadingBarReducer)
+    StoreModule.forFeature(loadingBarFeatureKey, loadingBarReducer),
+    ImageCropperModule,
+    MatDialogModule
   ],
   declarations: [
     BigInputComponent,
     BigInputActionComponent,
     RtlSupportDirective,
-    LoadingBarComponent
+    LoadingBarComponent,
+    CropperImageDialogComponent
   ],
   exports: [
     CommonModule,

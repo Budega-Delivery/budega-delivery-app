@@ -27,6 +27,7 @@ export class ClientRegisterComponent implements OnInit {
   // TODO: add notification
   // TODO: add password field
   // TODO: after create redirect to login
+  // TODO: add CSRF token https://angular.io/guide/security
   save() {
     if (this.form.valid)
       this.userStore.dispatch(userClientRegister({ client: this.form.value }));

@@ -38,6 +38,8 @@
   "budega.title.long": "Budega",
   "budega.title.short": "Budega",
   "budega.remove": "Remover",
+  "budega.yes": "Sim",
+  "budega.no": "Não",
   "budega.save": "Salvar",
   "budega.activate": "Ativar",
   "budega.notempty": "Não pode estar vazio",
@@ -76,14 +78,6 @@
   "budega.department.add.new": "Adicionar novo departamento",
   "budega.brand.add.new": "Adicionar nova marca",
 
-  "budega.client.firstname": "Nome",
-  "budega.client.lastname": "Sobrenome",
-  "budega.client.email": "Email",
-  "budega.client.register": "Registre-se",
-  "budega.client.create": "Enviar",
-  "budega.client.register.failure": "Falha ao se registrar, entre em contato com o suporte.",
-  "budega.client.register.success": "Seja vem vindo! Registro realizado com sucesso.",
-
   "budega.products": "Produtos",
   "budega.product.editing": "Editando Produto",
   "budega.product.stock.amount": "Estoque Total",
@@ -104,7 +98,21 @@
   "budega.product.emptylist": "Nenhum produto cadastrado!",
   "budega.product.addnew": "Vamos começar, adicione um novo produto!",
 
+  "budega.client.register": "Registre-se",
+  "budega.client.create": "Registrar",
+  "budega.client.register.failure": "Falha ao se registrar, entre em contato com o suporte.",
+  "budega.client.register.success": "Seja vem vindo! Registro realizado com sucesso.",
+
   "budega.users": "Usuários",
   "budega.user.emptylist": "Lista de usuários vazia",
-  "budega.user.addnew": "Adicione um novo usuário"
+  "budega.user.addnew": "Adicione um novo usuário",
+  "budega.user.active": "Ativado",
+  "budega.user.editing": "Editando usuário(a)",
+  "budega.user.deactive": "Desativado",
+  "budega.user.email": "Email",
+  "budega.user.email.verified": "Email Verificado",
+  "budega.user.username": "Nome de usuário",
+  "budega.user.firstname": "Nome",
+  "budega.user.lastname": "Sobrenome",
+  "budega.user.role": "Perfil"
 }
