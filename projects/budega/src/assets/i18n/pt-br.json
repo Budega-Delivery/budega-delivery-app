@@ -114,5 +114,10 @@
   "budega.user.username": "Nome de usuário",
   "budega.user.firstname": "Nome",
   "budega.user.lastname": "Sobrenome",
-  "budega.user.role": "Perfil"
+  "budega.user.role": "Perfil",
+  "budega.user.active.toggle": "Deseja ativar este(a) usuário(a).",
+  "budega.user.inactive.toggle": "Desativar este(a) usuário(a) implicará em remover o acesso dele(a) à Budega App.",
+  "budega.user.active.success": "Sucesso, ao ativar ou desativar usuário(a).",
+  "budega.user.inactive.success": "Erro ao ativar ou desativar usuário(a)."
+
 }

@@ -51,6 +51,20 @@ export const updateBudegaUser = createAction(
   props<{ budegaUser: BudegaUser }>()
 );
 
+export const activeBudegaUser = createAction(
+  UserActionsTypes.activeBudegaUserAction,
+  props<{ budegaUserId: string; active: boolean }>()
+);
+
+export const activeBudegaUserSuccess = createAction(
+  UserActionsTypes.activeBudegaUserSuccessAction
+);
+
+export const activeBudegaUserFailure = createAction(
+  UserActionsTypes.activeBudegaUserFailureAction,
+  props<{ error: HttpErrorResponse }>()
+);
+
 export const updateBudegaUserSuccess = createAction(
   UserActionsTypes.updateBudegaUserSuccessAction
 );

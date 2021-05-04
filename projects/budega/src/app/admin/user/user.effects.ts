@@ -49,6 +49,25 @@ export class UserEffects {
     )
   );
 
+  activeBudegaUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActionsTypes.activeBudegaUserAction),
+      switchMap(({ budegaUserId, active }) =>
+        this.userService.activeUser(budegaUserId, active).pipe(
+          map(() => ({
+            type: UserActionsTypes.activeBudegaUserSuccessAction
+          })),
+          catchError((error) =>
+            of({
+              type: UserActionsTypes.activeBudegaUserFailureAction,
+              error
+            })
+          )
+        )
+      )
+    )
+  );
+
   loadBudegaUserToUpdate$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActionsTypes.loadBudegaUserToUpdateAction),
@@ -115,7 +134,33 @@ export class UserEffects {
         map(() =>
           this.translateService
             .get('budega.user.register.failure')
+            .subscribe((res) => this.notificationService.error(res))
+        )
+      ),
+    { dispatch: false }
+  );
+
+  activeBudegaUserSuccessNotification$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActionsTypes.activeBudegaUserSuccessAction),
+        map(() =>
+          this.translateService
+            .get('budega.user.active.success')
             .subscribe((res) => this.notificationService.success(res))
+        )
+      ),
+    { dispatch: false }
+  );
+
+  activeBudegaUserFailureNotification$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActionsTypes.activeBudegaUserFailureAction),
+        map(() =>
+          this.translateService
+            .get('budega.user.inactive.success')
+            .subscribe((res) => this.notificationService.error(res))
         )
       ),
     { dispatch: false }
@@ -147,7 +192,7 @@ export class UserEffects {
         map(() =>
           this.translateService
             .get('budega.user.register.failure')
-            .subscribe((res) => this.notificationService.success(res))
+            .subscribe((res) => this.notificationService.error(res))
         )
       ),
     { dispatch: false }
@@ -162,7 +207,8 @@ export class UserEffects {
         UserActionsTypes.loadBudegaUsersAction,
         UserActionsTypes.loadBudegaUserToUpdateAction,
         UserActionsTypes.updateBudegaUserAction,
-        UserActionsTypes.updateBudegaUserImageAction
+        UserActionsTypes.updateBudegaUserImageAction,
+        UserActionsTypes.activeBudegaUserAction
       ),
       map(() => ({
         type: LoadingBarActionTypes.showIndeterminateLoading
@@ -173,17 +219,20 @@ export class UserEffects {
   hideLoadingBar$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
+        /* success */
         UserActionsTypes.registerBudegaUserSuccessAction,
         UserActionsTypes.loadBudegaUsersSuccessAction,
         UserActionsTypes.loadBudegaUserToUpdateSuccessAction,
         UserActionsTypes.updateBudegaUserSuccessAction,
         UserActionsTypes.updateBudegaUserImageSuccessAction,
+        UserActionsTypes.activeBudegaUserSuccessAction,
         /* failures */
         UserActionsTypes.registerBudegaUserFailureAction,
         UserActionsTypes.loadBudegaUsersFailureAction,
         UserActionsTypes.loadBudegaUserToUpdateFailureAction,
         UserActionsTypes.updateBudegaUserFailureAction,
-        UserActionsTypes.updateBudegaUserImageFailureAction
+        UserActionsTypes.updateBudegaUserImageFailureAction,
+        UserActionsTypes.activeBudegaUserFailureAction
       ),
       map(() => ({ type: LoadingBarActionTypes.hideIndeterminateLoading }))
     )

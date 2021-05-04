@@ -51,10 +51,23 @@ export class UserService {
     );
   }
 
-  updateBudegaUserImage(budegaUser: any, image: any): Observable<void> {
+  updateBudegaUserImage(
+    budegaUser: BudegaUser,
+    image: FormData
+  ): Observable<void> {
     return this.httpClient.post<void>(
       `${this.api.url}/${this.resource}/image/${budegaUser.id}`,
       image,
+      {
+        reportProgress: true
+      }
+    );
+  }
+
+  activeUser(budegaUserId: string, active: boolean): Observable<void> {
+    return this.httpClient.post<void>(
+      `${this.api.url}/${this.resource}/active/${budegaUserId}`,
+      { state: active },
       {
         reportProgress: true
       }

@@ -13,6 +13,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { BudegaUser } from '../models/models';
 import { UserListDataSource } from './user-list-datasource';
 import { environment } from '../../../../environments/environment';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActionsSubject, Store } from '@ngrx/store';
+import { AppState } from '../user.selectors';
+import { activeBudegaUser, loadBudegaUsers } from '../user.actions';
+import { ofType } from '@ngrx/effects';
+import { UserActionsTypes } from '../UserActionsTypes';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'budega-user-list',
@@ -23,12 +32,12 @@ import { environment } from '../../../../environments/environment';
 export class UserListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<BudegaUser>;
-  // @ViewChild('activeToggle') activeToggle: MatSlideToggle;
+  @ViewChild('table') table: MatTable<BudegaUser>;
   @Input() userList: BudegaUser[];
   dataSource: UserListDataSource;
   translate: TranslateService;
   api = environment.api.url;
+  destroyed$ = new Subject<boolean>();
 
   displayedColumns = [
     'created',
@@ -41,7 +50,12 @@ export class UserListComponent implements AfterViewInit, OnInit {
     'actions'
   ];
 
-  constructor(translate: TranslateService) {
+  constructor(
+    translate: TranslateService,
+    private _snackBar: MatSnackBar,
+    private userStore: Store<AppState>,
+    private actionsSubj: ActionsSubject
+  ) {
     this.translate = translate;
   }
 
@@ -75,9 +89,40 @@ export class UserListComponent implements AfterViewInit, OnInit {
 
   remove(id: string) {}
 
-  inactive(id: string) {}
+  toggleActive(event: MatSlideToggleChange, id: string) {
+    event.source.checked = !event.checked;
+    this.translate
+      .get([
+        !event.checked
+          ? 'budega.user.inactive.toggle'
+          : 'budega.user.active.toggle',
+        'budega.yes'
+      ])
+      .subscribe((result) => {
+        const [text, action] = Array.from(Object.values(result));
+        this._snackBar
+          .open(text, action, {
+            duration: 5000,
+            panelClass: ['custom-snack-bar']
+          })
+          .onAction()
+          .subscribe(() => {
+            this.userStore.dispatch(
+              activeBudegaUser({ budegaUserId: id, active: event.checked })
+            );
+            this.actionsSubj
+              .pipe(
+                ofType(UserActionsTypes.activeBudegaUserSuccessAction),
+                takeUntil(this.destroyed$)
+              )
+              .subscribe((res) => {
+                this.userStore.dispatch(loadBudegaUsers());
+                event.source.checked = event.checked;
+              });
+          });
+      });
+  }
 
   // TODO: ativar e desativar usuário
   // TODO: criar método de remoção
-  // TODO: confirm dialog para remoção
 }

@@ -27,4 +27,12 @@
       }
     }
   }
+
+  /* custom snack-bar */
+  .custom-snack-bar {
+    & button {
+      color: mat-color($foreground, text);
+      background-color: mat-color($accent);
+    }
+  }
 }

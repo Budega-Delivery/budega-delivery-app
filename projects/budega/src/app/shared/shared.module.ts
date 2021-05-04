@@ -83,6 +83,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
 import { CropperImageDialogComponent } from './cropper-image-dialog/cropper-image-dialog.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -128,7 +129,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     BigInputActionComponent,
     RtlSupportDirective,
     LoadingBarComponent,
-    CropperImageDialogComponent
+    CropperImageDialogComponent,
+    ConfirmDialogComponent
   ],
   exports: [
     CommonModule,

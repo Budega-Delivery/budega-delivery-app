@@ -20,6 +20,10 @@ export enum UserActionsTypes {
   updateBudegaUserSuccessAction = '[BudegaUser] Update Budega User Success',
   updateBudegaUserFailureAction = '[BudegaUser] Update Budega User Failure',
 
+  activeBudegaUserAction = '[BudegaUser] Active or Inactive BudegaUser',
+  activeBudegaUserSuccessAction = '[BudegaUser] Active or Inactive Budega User Success',
+  activeBudegaUserFailureAction = '[BudegaUser] Active or Inactive Budega User Failure',
+
   updateBudegaUserImageAction = '[BudegaUser] Update Budega User Image',
   updateBudegaUserImageSuccessAction = '[BudegaUser] Update Budega User Image Success',
   updateBudegaUserImageFailureAction = '[BudegaUser] Update BudegaU ser Image Failure',
