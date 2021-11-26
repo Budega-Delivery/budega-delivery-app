@@ -4,7 +4,8 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   Input,
-  AfterViewInit
+  AfterViewInit,
+  ChangeDetectorRef
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,7 +22,7 @@ import { activeBudegaUser, loadBudegaUsers } from '../user.actions';
 import { ofType } from '@ngrx/effects';
 import { UserActionsTypes } from '../UserActionsTypes';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'budega-user-list',
@@ -59,11 +60,14 @@ export class UserListComponent implements AfterViewInit, OnInit {
     this.translate = translate;
   }
 
-  ngOnInit() {
-    this.dataSource = new UserListDataSource(this.userList);
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
+    // this.userList$.subscribe((list) => {
+    //   debugger;
+    //   // this.dataSource = new UserListDataSource(list);
+    //   this.table.renderRows();
+    // });
     this.translate
       .get([
         'budega.table.itemsperpagelabel',
@@ -82,12 +86,10 @@ export class UserListComponent implements AfterViewInit, OnInit {
           res['budega.table.previouspagelabel'];
         this.paginator._intl.nextPageLabel = res['budega.table.nextpagelabel'];
       });
-    this.dataSource.sort = this.sort;
+    // this.table.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
-
-  remove(id: string) {}
 
   toggleActive(event: MatSlideToggleChange, id: string) {
     event.source.checked = !event.checked;
@@ -123,6 +125,8 @@ export class UserListComponent implements AfterViewInit, OnInit {
       });
   }
 
-  // TODO: ativar e desativar usuário
-  // TODO: criar método de remoção
+  formatLocal(date: number) {
+    const d = new Date(date);
+    return d.toLocaleDateString(this.translate.currentLang);
+  }
 }

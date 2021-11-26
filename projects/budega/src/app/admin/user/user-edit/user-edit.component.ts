@@ -46,6 +46,9 @@ export class UserEditComponent implements AfterViewInit {
   userImageUrl: string;
   image: Image;
   api = environment.api.url;
+  emailVerified = false;
+  recheckEmail = false;
+  resetPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -60,13 +63,13 @@ export class UserEditComponent implements AfterViewInit {
       filter((val) => val !== undefined)
     );
     this.form = fb.group({
-      active: [false],
+      enabled: [false],
       id: ['', [Validators.required]],
       username: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      role: [null, [Validators.required]],
+      clientRoles: [null, [Validators.required]],
       image: [null]
     });
   }
@@ -76,14 +79,17 @@ export class UserEditComponent implements AfterViewInit {
       this.roleListSelector = roles;
       for (const [k, v] of Object.entries(budegaUser)) {
         if (this.form.controls[k]) this.form.controls[k].setValue(v);
-        if (k === 'image') this.image = (v as unknown) as Image;
-        if (k === 'clientRoles') this.form.controls['role'].setValue(v[0]);
+        if (k === 'image') this.image = v as unknown as Image;
+        if (k === 'clientRoles')
+          this.form.controls['clientRoles'].setValue(v[0]);
       }
       if (budegaUser.attributes && budegaUser.attributes.avatar)
         this.userImageUrl = `${this.api}/${budegaUser.attributes.avatar}`;
+
+      this.emailVerified = !!budegaUser.emailVerified;
     });
 
-    this.form.controls['active'].valueChanges.subscribe(() =>
+    this.form.controls['enabled'].valueChanges.subscribe(() =>
       this.canBeActive()
     );
   }
@@ -91,12 +97,19 @@ export class UserEditComponent implements AfterViewInit {
   /*
    * TODO: ADD BUTTON TO REQUIRE RESET PASSWORD
    * TODO: ADD BUTTON TO RE-CHECK EMAIL
-   * TODO: ADD VIEW TO EMAIL VERIFIED
    *  */
 
   save() {
     if (this.form.valid) {
-      this.store.dispatch(updateBudegaUser({ budegaUser: this.form.value }));
+      this.store.dispatch(
+        updateBudegaUser({
+          updateBudegaUser: {
+            budegaUser: this.form.value,
+            resetPassword: this.resetPassword,
+            recheckEmail: this.recheckEmail
+          }
+        })
+      );
     }
 
     if (this.imageData)
@@ -108,12 +121,12 @@ export class UserEditComponent implements AfterViewInit {
       );
   }
 
-  removeUser() {
-    // add confirm dialog
-    this.store.dispatch(
-      removeBudegaUser({ budegaUserId: this.form.controls['id'].value })
-    );
-  }
+  // removeUser() {
+  //   // add confirm dialog
+  //   this.store.dispatch(
+  //     removeBudegaUser({ budegaUserId: this.form.controls['id'].value })
+  //   );
+  // }
 
   canBeActive() {
     // verify minimum to be active

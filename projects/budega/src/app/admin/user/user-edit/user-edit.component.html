@@ -1,4 +1,4 @@
-<ng-container *ngIf='edit$ | async'>
+<ng-container *ngrxLet='edit$'>
   <div class='container'>
     <form [formGroup]="form">
       <div class="row justify-content-center">
@@ -7,11 +7,11 @@
           <mat-card>
             <span class="d-flex justify-content-between align-items-baseline">
               <strong>{{ form.controls['username'].value }}</strong>
-                <mat-slide-toggle #activeToggle formControlName="active">{{ 'budega.user.active' | translate }}</mat-slide-toggle>
+                <mat-slide-toggle #activeToggle formControlName="enabled">{{ 'budega.user.active' | translate }}</mat-slide-toggle>
                 <div>
-                  <button class='button-fab-action' mat-mini-fab color="accent" (click)="removeUser()" matTooltip="{{'budega.remove' | translate }}">
-                   <fa-icon icon="trash"></fa-icon>
-                  </button>
+<!--                  <button class='button-fab-action' mat-mini-fab color="accent" (click)="removeUser()" matTooltip="{{'budega.remove' | translate }}">-->
+<!--                   <fa-icon icon="trash"></fa-icon>-->
+<!--                  </button>-->
                   <button class='button-fab-action' mat-mini-fab color="primary" matTooltip="{{'budega.save' | translate }}" (click)="save()">
                     <fa-icon icon="save"></fa-icon>
                   </button>
@@ -19,12 +19,22 @@
             </span>
             <div class='row'>
               <div class='col'>
-                <!--TODO: SHOW MINIATURA DA IMAGEM ATUAL -->
                 <img #userImage [hidden]='userImageUrl === undefined' width='150px' src='{{userImageUrl}}' alt='{{"budega.user.avatar.alt" | translate }}' />
                 <div>
                   <button class='img-upload' type="button" mat-stroked-button (click)="fileInput.click()">{{'budega.upload.image' | translate }}</button>
                   <input hidden (change)="onFileChange($event)" #fileInput type="file" id="file">
                 </div>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col'>
+                <p>{{'budega.user.email.verified' | translate }}: <strong><fa-icon icon='{{emailVerified ? "check" : "ban"}}'></fa-icon></strong></p>
+              </div>
+              <div class='col'>
+                <mat-slide-toggle [(ngModel)]="recheckEmail" [ngModelOptions]="{standalone: true}">{{ 'budega.user.email.recheck' | translate }}</mat-slide-toggle>
+              </div>
+              <div class='col'>
+                <mat-slide-toggle [(ngModel)]="resetPassword" [ngModelOptions]="{standalone: true}">{{ 'budega.user.reset.password' | translate }}</mat-slide-toggle>
               </div>
             </div>
             <div class='row'>
@@ -57,7 +67,7 @@
               <span class="d-flex justify-content-between align-items-baseline">
               <mat-form-field appearance="fill" class="col" [ngClass]="routeAnimationsElements">
                 <mat-label>{{'budega.user.role' | translate }}</mat-label>
-                <mat-select formControlName="role" [compareWith]="customCompare" required>
+                <mat-select formControlName="clientRoles" [compareWith]="customCompare" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let role of roleListSelector" [value]="role">
                     {{ 'budega.role.'+role.name | translate }}

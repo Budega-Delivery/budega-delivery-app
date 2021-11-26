@@ -2,7 +2,7 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
-  var isWatch = config.buildWebpack.options.watch;
+  const isWatch = config.buildWebpack.options.watch;
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -33,6 +33,7 @@ module.exports = function (config) {
     browsers: ['Chrome'],
     restartOnFileChange: true,
     customLaunchers: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       ChromeTravisCi: {
         base: 'Chrome',
         flags: ['--no-sandbox']

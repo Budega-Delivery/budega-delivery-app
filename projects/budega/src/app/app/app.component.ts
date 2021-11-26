@@ -40,10 +40,12 @@ export class AppComponent implements OnInit {
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
-  logo = require('../../assets/logo.png').default;
+  // logo = require('../../assets/logo.webp').default;
+  logo = '';
   isSmallScreen: boolean;
   sideNavOpened = true;
-  languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
+  // languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
+  languages = ['en', 'es', 'pt-br'];
   navigation = [
     { link: 'loja', label: 'budega.menu.store', roles: ['client', 'public'] },
     {
@@ -56,7 +58,7 @@ export class AppComponent implements OnInit {
     {
       link: 'admin/deliveries',
       label: 'budega.menu.deliveries',
-      roles: ['manager', 'deliveryman', 'stockist']
+      roles: ['manager', 'deliveryperson', 'stockist']
     }
   ];
   navigationSideMenu = [
@@ -74,9 +76,8 @@ export class AppComponent implements OnInit {
     private storageService: LocalStorageService,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.isSmallScreen = this.breakpointObserver.isMatched(
-      '(max-width: 830px)'
-    );
+    this.isSmallScreen =
+      this.breakpointObserver.isMatched('(max-width: 830px)');
     if (this.isSmallScreen) this.sideNavOpened = false;
   }
 

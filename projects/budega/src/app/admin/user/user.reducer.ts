@@ -1,10 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { BudegaUser } from './models/models';
+import { BudegaUser, Role } from './models/models';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   activeBudegaUser,
   activeBudegaUserFailure,
   activeBudegaUserSuccess,
+  loadBudegaRoles,
+  loadBudegaRolesFailure,
+  loadBudegaRolesSuccess,
   loadBudegaUsers,
   loadBudegaUsersFailure,
   loadBudegaUsersSuccess,
@@ -20,11 +23,13 @@ export const userFeatureKey = 'user';
 
 export interface State {
   budegaUserList: BudegaUser[];
+  roles: Role[];
   error?: HttpErrorResponse;
 }
 
 export const initialState: State = {
-  budegaUserList: []
+  budegaUserList: [],
+  roles: []
 };
 
 export const reducer = createReducer(
@@ -38,6 +43,15 @@ export const reducer = createReducer(
     ...state,
     error
   })),
+  on(loadBudegaRoles, (state) => state),
+  on(loadBudegaRolesSuccess, (state, { roles }) => ({
+    ...state,
+    roles: roles
+  })),
+  on(loadBudegaRolesFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
   on(loadBudegaUserToUpdate, (state, { id }) => ({ ...state, id })),
   on(loadBudegaUserToUpdateSuccess, (state, { editingBudegaUser }) => ({
     ...state,
@@ -47,7 +61,11 @@ export const reducer = createReducer(
     ...state,
     error
   })),
-  on(updateBudegaUser, (state, { budegaUser }) => ({ ...state, budegaUser })),
+  // eslint-disable-next-line no-shadow
+  on(updateBudegaUser, (state, { updateBudegaUser }) => ({
+    ...state,
+    updateBudegaUser
+  })),
   on(updateBudegaUserSuccess, (state) => ({ ...state })),
   on(updateBudegaUserFailure, (state, { error }) => ({
     ...state,

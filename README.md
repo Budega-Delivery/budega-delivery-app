@@ -115,3 +115,10 @@ Articles with content that explains various approaches used to build this starte
 - ngrx (or try [ngx-model](https://github.com/tomastrajan/ngx-model) if you prefer less boilerplate)
 - Angular Material
 - Bootstrap 4 (only reset, utils and grids)
+
+```bash
+
+$ docker build -t yurisbv/budega-app:vX.X.X .
+$ docker tag yurisbv/budega-app:vX.X.X yurisbv/budega-app:latest
+$ docker push yurisbv/budega-app
+```

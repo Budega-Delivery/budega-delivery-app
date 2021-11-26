@@ -1,4 +1,6 @@
 // eslint-disable-next-line no-shadow
+import { registerBudegaEmployee } from './user.actions';
+
 export enum UserActionsTypes {
   loadBudegaUsersAction = '[BudegaUser] Load Users',
   loadBudegaUsersSuccessAction = '[BudegaUser] Load Budega Users Success',
@@ -7,6 +9,10 @@ export enum UserActionsTypes {
   registerBudegaUserAction = '[BudegaUser] Budega User Register',
   registerBudegaUserSuccessAction = '[BudegaUser] Register Budega User Success',
   registerBudegaUserFailureAction = '[BudegaUser] Register Budega User Failure',
+
+  registerBudegaEmployeeAction = '[BudegaUser] Budega Employee Register',
+  registerBudegaEmployeeSuccessAction = '[BudegaUser] Register Budega Employee Success',
+  registerBudegaEmployeeFailureAction = '[BudegaUser] Register Budega Employee Failure',
 
   loadBudegaUserToUpdateAction = '[BudegaUser] Load User to Update',
   loadBudegaUserToUpdateSuccessAction = '[BudegaUser] Load Budega User to Update Success',
@@ -28,7 +34,7 @@ export enum UserActionsTypes {
   updateBudegaUserImageSuccessAction = '[BudegaUser] Update Budega User Image Success',
   updateBudegaUserImageFailureAction = '[BudegaUser] Update BudegaU ser Image Failure',
 
-  loadBudegaUserRoleListAction = '[BudegaUser Role] Load Budega User Role List',
-  loadBudegaUserRoleListSuccessAction = '[BudegaUser Role] Load Budega User Role List Success',
-  loadBudegaUserRoleListFailureAction = '[BudegaUser Role] Load Budega User Role List Failure'
+  loadBudegaRolesAction = '[BudegaUser Role] Load Budega User Role List',
+  loadBudegaRolesSuccessAction = '[BudegaUser Role] Load Budega Users Role List Success',
+  loadBudegaRolesFailureAction = '[BudegaUser Role] Load Budega Users Role List Failure'
 }

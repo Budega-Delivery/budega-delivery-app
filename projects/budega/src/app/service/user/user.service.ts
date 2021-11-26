@@ -3,7 +3,13 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { BudegaUser, ClientUser, Role } from '../../admin/user/models/models';
+import {
+  BudegaUser,
+  ClientUser,
+  NewBudegaEmployee,
+  Role,
+  UpdateBudegaUser
+} from '../../admin/user/models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +33,17 @@ export class UserService {
     return this.httpClient.post<void>(
       `${this.api.url}/${this.resource}/client`,
       client,
+      {
+        reportProgress: true
+      }
+    );
+  }
+
+  addEmployee(employee: NewBudegaEmployee): Observable<void> {
+    debugger;
+    return this.httpClient.post<void>(
+      `${this.api.url}/${this.resource}/employee`,
+      employee,
       {
         reportProgress: true
       }
@@ -58,6 +75,16 @@ export class UserService {
     return this.httpClient.post<void>(
       `${this.api.url}/${this.resource}/image/${budegaUser.id}`,
       image,
+      {
+        reportProgress: true
+      }
+    );
+  }
+
+  updateBudegaUser(updateBudegaUser: UpdateBudegaUser): Observable<void> {
+    return this.httpClient.put<void>(
+      `${this.api.url}/${this.resource}/${updateBudegaUser.budegaUser.id}`,
+      updateBudegaUser,
       {
         reportProgress: true
       }

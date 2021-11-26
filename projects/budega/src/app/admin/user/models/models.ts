@@ -23,3 +23,14 @@ export class BudegaUser {
   enabled: boolean;
   attributes: Record<string, string>;
 }
+
+export class NewBudegaEmployee {
+  email: string;
+  role: Role;
+}
+
+export class UpdateBudegaUser {
+  budegaUser: BudegaUser;
+  resetPassword: boolean;
+  recheckEmail: boolean;
+}

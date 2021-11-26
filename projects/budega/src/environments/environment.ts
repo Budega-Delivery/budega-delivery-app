@@ -11,10 +11,10 @@ export const environment = {
   production: false,
   test: false,
   api: {
-    url: 'http://localhost:3000'
+    url: 'https://api.budega.website'
   },
   keycloak: {
-    url: 'http://localhost:8081/auth',
+    url: 'https://auth.budega.website/auth/',
     realm: 'budega',
     clientId: 'budega-app'
   },

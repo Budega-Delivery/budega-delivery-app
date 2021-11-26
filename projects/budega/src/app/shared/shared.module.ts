@@ -53,7 +53,8 @@ import {
   faShoppingCart,
   faPaperPlane,
   faTimesCircle,
-  faSave
+  faSave,
+  faBan
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
@@ -208,7 +209,8 @@ export class SharedModule {
       faShoppingCart,
       faPaperPlane,
       faTimesCircle,
-      faSave
+      faSave,
+      faBan
     );
   }
 }

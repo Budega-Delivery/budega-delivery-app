@@ -1,6 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 import { UserActionsTypes } from './UserActionsTypes';
-import { BudegaUser, Role } from './models/models';
+import {
+  BudegaUser,
+  NewBudegaEmployee,
+  Role,
+  UpdateBudegaUser
+} from './models/models';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadBudegaUsers = createAction(
@@ -31,6 +36,20 @@ export const registerBudegaUserFailure = createAction(
   props<{ error: HttpErrorResponse }>()
 );
 
+export const registerBudegaEmployee = createAction(
+  UserActionsTypes.registerBudegaEmployeeAction,
+  props<{ newBudegaEmployee: NewBudegaEmployee }>()
+);
+
+export const registerBudegaEmployeeSuccess = createAction(
+  UserActionsTypes.registerBudegaEmployeeSuccessAction
+);
+
+export const registerBudegaEmployeeFailure = createAction(
+  UserActionsTypes.registerBudegaEmployeeFailureAction,
+  props<{ error: HttpErrorResponse }>()
+);
+
 export const loadBudegaUserToUpdate = createAction(
   UserActionsTypes.loadBudegaUserToUpdateAction,
   props<{ id: string }>()
@@ -48,7 +67,7 @@ export const loadBudegaUserToUpdateFailure = createAction(
 
 export const updateBudegaUser = createAction(
   UserActionsTypes.updateBudegaUserAction,
-  props<{ budegaUser: BudegaUser }>()
+  props<{ updateBudegaUser: UpdateBudegaUser }>()
 );
 
 export const activeBudegaUser = createAction(
@@ -102,16 +121,16 @@ export const updateBudegaUserImageFailure = createAction(
   props<{ error: HttpErrorResponse }>()
 );
 
-export const loadBudegaUserRole = createAction(
-  UserActionsTypes.loadBudegaUserRoleListAction
+export const loadBudegaRoles = createAction(
+  UserActionsTypes.loadBudegaRolesAction
 );
 
-export const loadBudegaUserRoleSuccess = createAction(
-  UserActionsTypes.loadBudegaUserRoleListSuccessAction,
-  props<{ roleList: Role[] }>()
+export const loadBudegaRolesSuccess = createAction(
+  UserActionsTypes.loadBudegaRolesSuccessAction,
+  props<{ roles: Role[] }>()
 );
 
-export const loadBudegaUserRoleFailure = createAction(
-  UserActionsTypes.loadBudegaUserRoleListFailureAction,
+export const loadBudegaRolesFailure = createAction(
+  UserActionsTypes.loadBudegaRolesFailureAction,
   props<{ error: HttpErrorResponse }>()
 );

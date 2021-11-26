@@ -29,6 +29,25 @@ export class UserEffects {
     )
   );
 
+  registerBudegaEmployee$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActionsTypes.registerBudegaEmployeeAction),
+      switchMap(({ newBudegaEmployee }) =>
+        this.userService.addEmployee(newBudegaEmployee).pipe(
+          map(() => ({
+            type: UserActionsTypes.registerBudegaEmployeeSuccessAction
+          })),
+          catchError((err) =>
+            of({
+              type: UserActionsTypes.registerBudegaEmployeeFailureAction,
+              err
+            })
+          )
+        )
+      )
+    )
+  );
+
   loadBudegaUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActionsTypes.loadBudegaUsersAction),
@@ -41,6 +60,26 @@ export class UserEffects {
           catchError((error) =>
             of({
               type: UserActionsTypes.loadBudegaUsersFailureAction,
+              error
+            })
+          )
+        )
+      )
+    )
+  );
+
+  loadBudegaRoles$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActionsTypes.loadBudegaUsersAction),
+      switchMap(() =>
+        this.userService.getRoles().pipe(
+          map((roles) => ({
+            type: UserActionsTypes.loadBudegaRolesSuccessAction,
+            roles
+          })),
+          catchError((error) =>
+            of({
+              type: UserActionsTypes.loadBudegaRolesFailureAction,
               error
             })
           )
@@ -85,6 +124,27 @@ export class UserEffects {
               type: UserActionsTypes.loadBudegaUserToUpdateFailureAction,
               error
             })
+          )
+        )
+      )
+    )
+  );
+
+  updateBudegaUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActionsTypes.updateBudegaUserAction),
+      switchMap(({ updateBudegaUser }) =>
+        this.userService.updateBudegaUser(updateBudegaUser).pipe(
+          map(
+            () => ({
+              type: UserActionsTypes.updateBudegaUserSuccessAction
+            }),
+            catchError((error) =>
+              of({
+                type: UserActionsTypes.updateBudegaUserFailureAction,
+                error
+              })
+            )
           )
         )
       )
@@ -198,6 +258,33 @@ export class UserEffects {
     { dispatch: false }
   );
 
+  registerBudegaEmployeeSuccessNotification$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActionsTypes.registerBudegaEmployeeSuccessAction),
+        map(() =>
+          this.translateService
+            .get('budega.employee.create.success')
+            .subscribe((res) => this.notificationService.success(res))
+        )
+      ),
+    { dispatch: false }
+  );
+
+  registerBudegaEmployeeFailureNotification$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActionsTypes.registerBudegaEmployeeFailureAction),
+        map(() =>
+          this.translateService
+            .get('budega.employee.create.failure')
+            // TODO: escrever mensagem de error
+            .subscribe((res) => this.notificationService.error(res))
+        )
+      ),
+    { dispatch: false }
+  );
+
   /* Loading Bar */
 
   showLoadingBar$ = createEffect(() =>
@@ -208,7 +295,9 @@ export class UserEffects {
         UserActionsTypes.loadBudegaUserToUpdateAction,
         UserActionsTypes.updateBudegaUserAction,
         UserActionsTypes.updateBudegaUserImageAction,
-        UserActionsTypes.activeBudegaUserAction
+        UserActionsTypes.activeBudegaUserAction,
+        UserActionsTypes.registerBudegaEmployeeAction,
+        UserActionsTypes.loadBudegaRolesAction
       ),
       map(() => ({
         type: LoadingBarActionTypes.showIndeterminateLoading
@@ -226,13 +315,18 @@ export class UserEffects {
         UserActionsTypes.updateBudegaUserSuccessAction,
         UserActionsTypes.updateBudegaUserImageSuccessAction,
         UserActionsTypes.activeBudegaUserSuccessAction,
+        UserActionsTypes.registerBudegaEmployeeSuccessAction,
+        UserActionsTypes.loadBudegaRolesSuccessAction,
+
         /* failures */
         UserActionsTypes.registerBudegaUserFailureAction,
         UserActionsTypes.loadBudegaUsersFailureAction,
         UserActionsTypes.loadBudegaUserToUpdateFailureAction,
         UserActionsTypes.updateBudegaUserFailureAction,
         UserActionsTypes.updateBudegaUserImageFailureAction,
-        UserActionsTypes.activeBudegaUserFailureAction
+        UserActionsTypes.activeBudegaUserFailureAction,
+        UserActionsTypes.registerBudegaEmployeeFailureAction,
+        UserActionsTypes.loadBudegaRolesFailureAction
       ),
       map(() => ({ type: LoadingBarActionTypes.hideIndeterminateLoading }))
     )

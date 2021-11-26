@@ -5,7 +5,15 @@ export const environment = {
   envName: 'PROD',
   production: true,
   test: false,
-  i18nPrefix: '/angular-ngrx-material-starter',
+  api: {
+    url: 'https://api.budega.website'
+  },
+  keycloak: {
+    url: 'https://auth.budega.website/auth/',
+    realm: 'budega',
+    clientId: 'budega-app'
+  },
+  i18nPrefix: '',
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies['@angular/core'],
