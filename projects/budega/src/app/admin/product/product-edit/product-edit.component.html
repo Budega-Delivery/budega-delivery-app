@@ -22,8 +22,7 @@
             <div class='row'>
               <div class='col'>
                 <img *ngIf='image != undefined' width='150px' src='data:{{image.mimetype}};base64,{{image.buffer}}' alt='{{image.originalname}}' />
-                <img #productImage *ngIf='image === undefined' width='150px' alt='' src='' />
-
+                <img #productImage *ngIf='!image' width='150px' alt='' src='' />
                 <div>
                   <button class='img-upload' type="button" mat-stroked-button (click)="fileInput.click()">{{'budega.upload.image' | translate }}</button>
                   <input hidden (change)="onFileChange($event)" #fileInput type="file" id="file">

@@ -62,10 +62,10 @@ describe('SettingsEffects', () => {
       const { cold } = helpers;
 
       const settings: SettingsState = {
-        language: 'en',
+        language: 'pt-br',
         pageAnimations: true,
         elementsAnimations: true,
-        theme: 'default',
+        theme: 'dark',
         nightTheme: 'default',
         autoNightMode: false,
         stickyHeader: false,
@@ -73,7 +73,7 @@ describe('SettingsEffects', () => {
         hour: 12
       };
       store.pipe.and.returnValue(of(settings));
-      const persistAction = actionSettingsChangeTheme({ theme: 'DEFAULT' });
+      const persistAction = actionSettingsChangeTheme({ theme: 'DARK' });
       const source = cold('a', { a: persistAction });
       const actions = new Actions(source);
       const effect = new SettingsEffects(

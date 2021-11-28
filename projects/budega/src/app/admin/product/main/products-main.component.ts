@@ -20,6 +20,8 @@ export class ProductsMainComponent implements OnInit {
     name: ['', [Validators.required, Validators.minLength(4)]]
   });
 
+  // TODO: melhorar mensagem de erro no form do novo produto
+
   constructor(private productStore: Store<AppState>, private fb: FormBuilder) {
     this.productList$ = this.productStore.select(selectProductList);
   }

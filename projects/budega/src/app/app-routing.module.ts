@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthGuardService } from './core/keycloak/auth-guard.service';
+import { MainComponent } from './public/main/main/main.component';
+import { ClientRegisterComponent } from './public/client-register/client-register.component';
 
 const routes: Routes = [
   {
@@ -10,8 +12,13 @@ const routes: Routes = [
   },
   {
     path: 'loja',
-    loadChildren: () =>
-      import('./public/public.module').then((m) => m.PublicModule)
+    component: MainComponent,
+    data: { title: 'budega.menu.about' }
+  },
+  {
+    path: 'registrar',
+    component: ClientRegisterComponent,
+    data: { title: 'budega.menu.register' }
   },
   {
     path: 'admin',

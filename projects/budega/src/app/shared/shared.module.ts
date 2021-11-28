@@ -28,6 +28,7 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import {
   faPlus,
+  faMinus,
   faEdit,
   faTrash,
   faTimes,
@@ -181,6 +182,7 @@ export class SharedModule {
       faGithub,
       faMediumM,
       faPlus,
+      faMinus,
       faEdit,
       faTrash,
       faTimes,

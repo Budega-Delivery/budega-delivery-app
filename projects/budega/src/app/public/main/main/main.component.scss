@@ -125,11 +125,15 @@
   font-weight: bold;
 }
 
-.product-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-
 .add-button {
   width: 100%;
+}
+
+mat-card {
+  margin-top: 1rem;
+}
+
+.icon-product-card {
+  width: 2rem !important;
+  min-width: unset !important;
 }

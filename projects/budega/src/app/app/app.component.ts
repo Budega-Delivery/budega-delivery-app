@@ -20,6 +20,7 @@ import {
   actionSettingsChangeLanguage
 } from '../core/settings/settings.actions';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AppState, selectCart } from '../public/public.selectors';
 
 /*
  * TODO: Criar carrinho
@@ -40,12 +41,11 @@ export class AppComponent implements OnInit {
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
-  // logo = require('../../assets/logo.webp').default;
-  logo = '';
+  logo = 'assets/logo.png';
   isSmallScreen: boolean;
   sideNavOpened = true;
   // languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
-  languages = ['en', 'es', 'pt-br'];
+  languages = ['pt-br', 'en'];
   navigation = [
     { link: 'loja', label: 'budega.menu.store', roles: ['client', 'public'] },
     {
@@ -70,10 +70,12 @@ export class AppComponent implements OnInit {
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
+  cart$: Observable<string[]>;
 
   constructor(
     private store: Store,
     private storageService: LocalStorageService,
+    private publicStore: Store<AppState>,
     private breakpointObserver: BreakpointObserver
   ) {
     this.isSmallScreen =
@@ -99,6 +101,7 @@ export class AppComponent implements OnInit {
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
+    this.cart$ = this.publicStore.pipe(select(selectCart));
   }
 
   onLoginClick() {

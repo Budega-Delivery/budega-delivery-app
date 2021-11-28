@@ -68,8 +68,8 @@ export class ProductListDataSource extends DataSource<Product> {
       switch (this.sort.active) {
         case 'name':
           return compare(a.name, b.name, isAsc);
-        case 'id':
-          return compare(+a._id, +b._id, isAsc);
+        // case 'id':
+        //   return compare(+a._id, +b._id, isAsc);
         default:
           return 0;
       }

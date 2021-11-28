@@ -40,7 +40,6 @@ export class UserService {
   }
 
   addEmployee(employee: NewBudegaEmployee): Observable<void> {
-    debugger;
     return this.httpClient.post<void>(
       `${this.api.url}/${this.resource}/employee`,
       employee,

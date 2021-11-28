@@ -7,7 +7,7 @@ import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 
 import { environment } from '../../environments/environment';
 
-import { initStateFromLocalStorage } from './meta-reducers/init-state-from-local-storage.reducer';
+import { initCoreStateFromLocalStorage } from './meta-reducers/init-state-from-local-storage.reducer';
 import { debug } from './meta-reducers/debug.reducer';
 import { AuthState } from './auth/auth.models';
 import { authReducer } from './auth/auth.reducer';
@@ -22,7 +22,7 @@ export const reducers: ActionReducerMap<AppState> = {
 };
 
 export const metaReducers: MetaReducer<AppState>[] = [
-  initStateFromLocalStorage
+  initCoreStateFromLocalStorage
 ];
 
 if (!environment.production) {

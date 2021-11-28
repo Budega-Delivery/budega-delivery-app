@@ -135,7 +135,7 @@ export class UserEditComponent implements AfterViewInit {
     if (!this.activeToggle) return;
     if (!this.form.valid) {
       this.activeToggle.checked = false;
-      console.log('cant be active');
+      console.error('cant be active');
     }
   }
 

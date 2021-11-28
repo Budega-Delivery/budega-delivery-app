@@ -9,7 +9,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { ProductListDataSource } from './product-list-datasource';
-import { Observable } from 'rxjs';
 import { Product } from '../models/models';
 import { routeAnimations } from '../../../core/animations/route.animations';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,7 +29,7 @@ export class ProductListComponent implements AfterViewInit, OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
-    '_id',
+    // '_id',
     'name',
     'image',
     'brand',

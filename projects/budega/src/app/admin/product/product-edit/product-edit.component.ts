@@ -35,6 +35,7 @@ import {
   MatAutocompleteSelectedEvent
 } from '@angular/material/autocomplete';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { debug } from '../../../core/meta-reducers/debug.reducer';
 
 @Component({
   selector: 'budega-edit-product',
@@ -91,8 +92,7 @@ export class ProductEditComponent implements AfterViewInit {
       department: [''],
       categories: [''],
       stockAmount: [0],
-      stockMinimumAlert: [0],
-      image: [null]
+      stockMinimumAlert: [0]
     });
   }
 
@@ -103,17 +103,17 @@ export class ProductEditComponent implements AfterViewInit {
       this.allCategoriesList = categories;
       for (const [k, v] of Object.entries(product)) {
         if (this.form.controls[k]) this.form.controls[k].setValue(v);
-        if (k === 'image') this.image = (v as unknown) as Image;
-        if (k === 'stock') {
+        if (k === 'image') this.image = v as unknown as Image;
+        if (k === 'stock' && v) {
           this.form.controls['stockAmount'].setValue(
-            ((v as unknown) as ProductStock).amount
+            (v as unknown as ProductStock).amount
           );
           this.form.controls['stockMinimumAlert'].setValue(
-            ((v as unknown) as ProductStock).minimumAlert
+            (v as unknown as ProductStock).minimumAlert
           );
         }
         if (k === 'categories')
-          this.categoriesList = (v as unknown) as ProductCategory[];
+          this.categoriesList = v as unknown as ProductCategory[];
       }
     });
     this.form.controls['active'].valueChanges.subscribe(() =>
@@ -160,7 +160,7 @@ export class ProductEditComponent implements AfterViewInit {
       )
     ) {
       this.activeToggle.checked = false;
-      console.log('cant be active');
+      console.error('cant be active');
     }
   }
 
@@ -193,7 +193,7 @@ export class ProductEditComponent implements AfterViewInit {
   }
 
   onFileChange(event: Event) {
-    const file = ((event.target as unknown) as HTMLInputElement).files[0];
+    const file = (event.target as unknown as HTMLInputElement).files[0];
     if (file) {
       this.productImage.nativeElement.src = URL.createObjectURL(file);
       this.productImage.nativeElement.alt = file.name;
