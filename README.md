@@ -120,5 +120,5 @@ Articles with content that explains various approaches used to build this starte
 
 $ docker build -t yurisbv/budega-app:vX.X.X .
 $ docker tag yurisbv/budega-app:vX.X.X yurisbv/budega-app:latest
-$ docker push yurisbv/budega-app
+$ docker push yurisbv/budega-app:vX.X.X
 ```
