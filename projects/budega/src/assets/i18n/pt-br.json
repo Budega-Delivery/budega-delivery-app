@@ -12,6 +12,10 @@
   "budega.menu.store": "Loja",
   "budega.menu.deliveries": "Entregas",
 
+  "budega.cart.order.total": "Total: R$",
+  "budega.cart.order.buy": "Comprar",
+  "budega.cart.empty": "Carrinho vazio...",
+
   "budega.settings.animations.elements": "Elementos de navegação deslizam para cima",
   "budega.settings.animations.page": "Navegação com transição em toda pagina",
   "budega.settings.animations.title": "Animações",

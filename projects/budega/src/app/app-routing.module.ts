@@ -3,6 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthGuardService } from './core/keycloak/auth-guard.service';
 import { MainComponent } from './public/main/main/main.component';
 import { ClientRegisterComponent } from './public/client-register/client-register.component';
+import { CartComponent } from './public/cart/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
   {
     path: 'loja',
     component: MainComponent,
-    data: { title: 'budega.menu.about' }
+    data: { title: 'budega.menu.store' }
   },
   {
     path: 'registrar',
@@ -21,12 +22,18 @@ const routes: Routes = [
     data: { title: 'budega.menu.register' }
   },
   {
+    path: 'carrinho',
+    component: CartComponent,
+    canActivate: [AuthGuardService],
+    data: { title: 'budega.menu.cart', roles: ['client'] }
+  },
+  {
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule)
   },
   {
-    path: 'settings',
+    path: 'configuracoes',
     loadChildren: () =>
       import('./public/settings/settings.module').then((m) => m.SettingsModule)
   },

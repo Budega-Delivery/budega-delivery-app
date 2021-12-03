@@ -5,6 +5,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { ProductModule } from './product/product.module';
 import { SharedModule } from '../shared/shared.module';
 import { UserModule } from './user/user.module';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -13,7 +14,10 @@ import { UserModule } from './user/user.module';
     AdminRoutingModule,
     ProductModule,
     SharedModule,
-    UserModule
+    UserModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ]
 })
 export class AdminModule {}

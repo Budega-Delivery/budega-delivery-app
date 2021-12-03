@@ -20,13 +20,7 @@ import {
   actionSettingsChangeLanguage
 } from '../core/settings/settings.actions';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AppState, selectCart } from '../public/public.selectors';
-
-/*
- * TODO: Criar carrinho
- * TODO: Ajustar navbar e icones
- * TODO:
- * */
+import { AppState, CartItem, selectCart } from '../public/public.selectors';
 
 @Component({
   selector: 'budega-root',
@@ -70,7 +64,12 @@ export class AppComponent implements OnInit {
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
-  cart$: Observable<string[]>;
+  cart$: Observable<Map<string, CartItem>>;
+  cartOrder = {
+    link: 'carrinho',
+    label: 'budega.menu.cart',
+    roles: ['client']
+  };
 
   constructor(
     private store: Store,
@@ -119,5 +118,12 @@ export class AppComponent implements OnInit {
   sideNavToggle() {
     this.sidenav.toggle();
     this.sideNavOpened = this.isSmallScreen ? false : !this.sideNavOpened;
+  }
+
+  getCartAmount(cart: Map<string, CartItem>): number {
+    let amount = 0;
+    amount = 0;
+    if (cart) Array.from(cart.values()).map((a) => (amount += a.amount));
+    return amount;
   }
 }

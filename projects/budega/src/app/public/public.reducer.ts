@@ -19,7 +19,7 @@ import {
   removeProductFromCartSuccess
 } from './public.actions';
 import { initPublicStateFromLocalStorage } from '../core/meta-reducers/init-state-from-local-storage.reducer';
-import { AppState } from './public.selectors';
+import { AppState, CartItem } from './public.selectors';
 
 export const publicFeatureKey = 'public';
 
@@ -33,13 +33,13 @@ export const metaReducers: MetaReducer<AppState>[] = [
 
 export interface State {
   productList: Product[];
-  cart: string[];
+  cart: Map<string, CartItem>;
   error?: HttpErrorResponse;
 }
 
 export const initialState: State = {
   productList: [],
-  cart: []
+  cart: new Map<string, CartItem>()
 };
 
 export const reducer = createReducer(
@@ -53,17 +53,17 @@ export const reducer = createReducer(
     ...state,
     error
   })),
-  on(addProductToCart, (state, { id }) => ({
+  on(addProductToCart, (state, { product }) => ({
     ...state,
-    id
+    product
   })),
   on(addProductToCartSuccess, (state, { cart }) => ({
     ...state,
     cart
   })),
-  on(removeProductFromCart, (state, { id }) => ({
+  on(removeProductFromCart, (state, { product }) => ({
     ...state,
-    id
+    product
   })),
   on(removeProductFromCartSuccess, (state, { cart }) => ({
     ...state,

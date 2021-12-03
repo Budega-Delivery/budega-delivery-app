@@ -75,11 +75,13 @@
           <ng-container *ngrxLet='cart$; let cart; let e = $error, let c = $complete'>
             <button
               [matTooltip]="'budega.menu.cart' | translate"
-               *budegaHasRole="['client', 'public']"
-               routerLink='cart'
+              routerLinkActive="active"
+              [routerLink]='"carrinho"'
+               *budegaHasRole="['client']"
+               routerLink='carrinho'
                matTooltipPosition="below"
                mat-icon-button
-               matBadge="{{ cart ? cart.length : 0 }}"
+               matBadge="{{ cart ? getCartAmount(cart) : 0 }}"
                matBadgeColor="warn"
                matBadgeSize='small'
                matBadgePosition="below"
@@ -93,6 +95,8 @@
           <button
             [matTooltip]="'budega.menu.settings' | translate"
             matTooltipPosition="below"
+            routerLinkActive="active"
+            [routerLink]='"configuracoes"'
             mat-icon-button routerLink="settings" class="d-none d-sm-inline">
             <fa-icon icon="cog"></fa-icon>
           </button>

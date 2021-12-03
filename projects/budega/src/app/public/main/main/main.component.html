@@ -1,7 +1,7 @@
 <div class='container'>
-  <div class="row align-items-stretch">
+  <div class="row d-flex align-items-stretch">
     <ng-container *ngrxLet="productList$; let list; let e = $error, let c = $complete" >
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor='let item of list' [ngClass]="routeAnimationsElements">
+    <div class="col-6 col-sloadProductAmountm-4 col-md-3 col-lg-2" *ngFor='let item of list' [ngClass]="routeAnimationsElements">
         <mat-card class="product-card" >
         <img mat-card-image src="data:{{item.image.mimetype}};base64,{{item.image.buffer}}" alt="{{item.image.originalname}}">
         <mat-card-content>
@@ -10,14 +10,14 @@
 
         <mat-card-actions m='primary'>
           <ng-container *ngrxLet='cart$; let cart; let e = $error, let c = $complete'>
-            <button *ngIf='!loadProductAmount(item._id, cart); else elseBlock' mat-raised-button color='primary' (click)='addProduct(item._id)' class='add-button'>{{'budega.add' | translate}}</button>
+            <button *ngIf='!loadProductAmount(item._id, cart); else elseBlock' mat-raised-button color='primary' (click)='addProduct(item)' class='add-button'>{{'budega.add' | translate}}</button>
             <ng-template #elseBlock>
               <div class='d-flex justify-content-between align-items-baseline'>
                 <button
                   [matTooltip]="'budega.menu.minus' | translate"
                   matTooltipPosition="below"
                   mat-icon-button color="accent"
-                  (click)='removeProduct(item._id)'
+                  (click)='removeProduct(item)'
                 >
                   <fa-icon icon="minus"></fa-icon>
                 </button>
@@ -26,7 +26,7 @@
                   [matTooltip]="'budega.menu.add' | translate"
                   matTooltipPosition="below"
                   mat-icon-button color="accent"
-                  (click)='addProduct(item._id)'
+                  (click)='addProduct(item)'
                 >
                   <fa-icon icon="plus"></fa-icon>
                 </button>

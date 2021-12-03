@@ -22,6 +22,7 @@ import { PublicEffects } from './public/public.effects';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './public/main/main/main.component';
 import { ClientRegisterComponent } from './public/client-register/client-register.component';
+import { CartModule } from './public/cart/cart.module';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { ClientRegisterComponent } from './public/client-register/client-registe
     // public
     StoreModule.forFeature(publicFeatureKey, publicReducer),
     EffectsModule.forFeature([PublicEffects]),
+    CartModule,
     CommonModule,
     SharedModule
   ],

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../../../admin/product/models/models';
 import {
   AppState,
+  CartItem,
   selectAvailableProducts,
   selectCart
 } from '../../public.selectors';
@@ -25,7 +26,7 @@ import {
 export class MainComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   productList$: Observable<Product[]>;
-  cart$: Observable<string[]>;
+  cart$: Observable<Map<string, CartItem>>;
 
   constructor(private publicStore: Store<AppState>) {
     this.cart$ = this.publicStore.select(selectCart);
@@ -37,13 +38,14 @@ export class MainComponent implements OnInit {
     this.publicStore.dispatch(loadClientCart());
   }
 
-  loadProductAmount(id: string, list: string[]): number {
-    return list ? list.filter((v) => v === id).length : 0;
+  loadProductAmount(id: string, list: Map<string, CartItem>): number {
+    const item = list.get(id);
+    return item ? item.amount : 0;
   }
-  addProduct(id: string) {
-    this.publicStore.dispatch(addProductToCart({ id: id }));
+  addProduct(product: Product) {
+    this.publicStore.dispatch(addProductToCart({ product }));
   }
-  removeProduct(id: string) {
-    this.publicStore.dispatch(removeProductFromCart({ id: id }));
+  removeProduct(product: Product) {
+    this.publicStore.dispatch(removeProductFromCart({ product }));
   }
 }

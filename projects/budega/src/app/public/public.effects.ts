@@ -16,7 +16,7 @@ import { LoadingBarActionTypes } from '../shared/loading-bar/loadingBarActionsTy
 import { of } from 'rxjs';
 import { ProductService } from '../service/product/product.service';
 import { Product } from '../admin/product/models/models';
-import { AppState, selectCart } from './public.selectors';
+import { AppState, CartItem, selectCart } from './public.selectors';
 import { select, Store } from '@ngrx/store';
 import { LocalStorageService } from '../core/local-storage/local-storage.service';
 
@@ -66,7 +66,7 @@ export class PublicEffects {
       ofType(PublicActionsTypes.addProductToCart),
       withLatestFrom(this.publicStore.select(selectCart)),
       // @ts-ignore
-      map(([action, cart]) => addToCart(action.id, cart)),
+      map(([action, cart]) => addToCart(action.product, cart)),
       map((newCart) => ({
         type: PublicActionsTypes.addProductToCartSuccess,
         cart: newCart
@@ -79,7 +79,7 @@ export class PublicEffects {
       ofType(PublicActionsTypes.removeProductFromCart),
       withLatestFrom(this.publicStore.select(selectCart)),
       // @ts-ignore
-      map(([action, cart]) => removeFromCart(action.id, cart)),
+      map(([action, cart]) => removeFromCart(action.product, cart)),
       map((newCart) => ({
         type: PublicActionsTypes.removeProductFromCartSuccess,
         cart: newCart
@@ -92,7 +92,10 @@ export class PublicEffects {
       ofType(PublicActionsTypes.loadClientCart),
       map(() => ({
         type: PublicActionsTypes.loadClientCardSuccess,
-        cart: this.localStorageService.getItem(PUBLIC_CART_KEY) || []
+        cart:
+          new Map(
+            Object.entries(this.localStorageService.getItem(PUBLIC_CART_KEY))
+          ) || new Map<string, CartItem>()
       }))
     )
   );
@@ -106,7 +109,10 @@ export class PublicEffects {
         ),
         withLatestFrom(this.publicStore.select(selectCart)),
         map(([action, cart]) =>
-          this.localStorageService.setItem(PUBLIC_CART_KEY, cart)
+          this.localStorageService.setItem(
+            PUBLIC_CART_KEY,
+            Object.fromEntries(cart)
+          )
         )
       ),
     { dispatch: false }
@@ -191,9 +197,29 @@ export class PublicEffects {
   ) {}
 }
 
-const addToCart = (id: string, cart: string[]): string[] => [id, ...cart];
-const removeFromCart = (id: string, cart: string[]): string[] => {
-  const arr = [...cart];
-  arr.splice(arr.indexOf(id), 1);
-  return arr;
+const addToCart = (
+  product: Product,
+  cart: Map<string, CartItem>
+): Map<string, CartItem> => {
+  if (cart.get(product._id)) cart.get(product._id).amount++;
+  else cart.set(product._id, { amount: 1, product: product });
+  return cart;
+};
+const removeFromCart = (
+  product: Product,
+  cart: Map<string, CartItem>
+): Map<string, CartItem> => {
+  if (cart.get(product._id)) {
+    cart.get(product._id).amount--;
+    if (cart.get(product._id).amount === 0) cart.delete(product._id);
+  }
+  return cart;
+};
+
+const purgeFromCart = (
+  product: Product,
+  cart: Map<string, CartItem>
+): Map<string, CartItem> => {
+  if (cart.get(product._id)) cart.delete(product._id);
+  return cart;
 };

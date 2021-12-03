@@ -3,6 +3,7 @@ import { PublicActionsTypes } from './PublicActionsTypes';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ClientUser } from '../admin/user/models/models';
 import { Product } from '../admin/product/models/models';
+import { CartItem } from './public.selectors';
 
 export const userClientRegister = createAction(
   PublicActionsTypes.userClientRegister,
@@ -33,22 +34,22 @@ export const loadProductsFailure = createAction(
 
 export const addProductToCart = createAction(
   PublicActionsTypes.addProductToCart,
-  props<{ id: string }>()
+  props<{ product: Product }>()
 );
 
 export const removeProductFromCart = createAction(
   PublicActionsTypes.removeProductFromCart,
-  props<{ id: string }>()
+  props<{ product: Product }>()
 );
 
 export const addProductToCartSuccess = createAction(
   PublicActionsTypes.addProductToCartSuccess,
-  props<{ cart: string[] }>()
+  props<{ cart: Map<string, CartItem> }>()
 );
 
 export const removeProductFromCartSuccess = createAction(
   PublicActionsTypes.removeProductFromCartSuccess,
-  props<{ cart: string[] }>()
+  props<{ cart: Map<string, CartItem> }>()
 );
 
 export const removeProductFromFailure = createAction(
@@ -63,7 +64,7 @@ export const loadClientCart = createAction(PublicActionsTypes.loadClientCart);
 
 export const loadClientCardSuccess = createAction(
   PublicActionsTypes.loadClientCardSuccess,
-  props<{ cart: string[] }>()
+  props<{ cart: Map<string, CartItem> }>()
 );
 
 export const loadClientCardFailure = createAction(

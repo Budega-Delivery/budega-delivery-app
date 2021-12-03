@@ -1,10 +1,14 @@
 import { createSelector, MetaReducer } from '@ngrx/store';
 import { Product } from '../admin/product/models/models';
-import { initPublicStateFromLocalStorage } from '../core/meta-reducers/init-state-from-local-storage.reducer';
+
+export interface CartItem {
+  amount: number;
+  product: Product;
+}
 
 export interface PublicState {
   productList: Product[];
-  cart: string[];
+  cart: Map<string, CartItem>;
 }
 
 export interface AppState {
