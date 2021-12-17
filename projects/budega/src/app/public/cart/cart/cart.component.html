@@ -41,13 +41,13 @@
                   </div>
                 </div>
           <mat-divider></mat-divider>
-          <mat-card-actions class='d-flex justify-content-end'>
-            <button mat-flat-button color='accent' class='buy-button' (click)='finishOrder()'>
-              {{'budega.cart.order.buy' | translate}}
-            </button>
-            <h4>{{'budega.cart.order.total' | translate }}: {{ getCartAmountValue(cart) }}</h4>
-          </mat-card-actions>
         </div>
+        <mat-card-actions class='d-flex justify-content-end'>
+          <button mat-flat-button color='accent' class='buy-button' (click)='finishOrder(cartArray(cart))'>
+            {{'budega.cart.order.buy' | translate}}
+          </button>
+          <h4>{{'budega.cart.order.total' | translate }}: {{ getCartAmountValue(cart) }}</h4>
+        </mat-card-actions>
       </div>
     </mat-card>
     <ng-template #cartEmpty><h2>{{'budega.cart.empty' | translate }}</h2></ng-template>

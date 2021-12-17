@@ -70,3 +70,18 @@ export const loadClientCardSuccess = createAction(
 export const loadClientCardFailure = createAction(
   PublicActionsTypes.loadClientCardFailure
 );
+
+export const createOrder = createAction(
+  PublicActionsTypes.createOrder,
+  props<{ items: CartItem[] }>()
+);
+
+export const createOrderSuccess = createAction(
+  PublicActionsTypes.createOrderSuccess,
+  props<{ orderId: string }>()
+);
+
+export const createOrderFailure = createAction(
+  PublicActionsTypes.createOrderFailure,
+  props<{ error: HttpErrorResponse }>()
+);

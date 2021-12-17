@@ -40,13 +40,10 @@
                   {{'budega.notempty' | translate }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-3" [ngClass]="routeAnimationsElements">
-                <input matInput placeholder="{{'budega.status' | translate }}"
-                       formControlName="status">
-                <mat-error *ngIf="form.get('status').invalid">
-                  {{'budega.notempty' | translate }}
-                </mat-error>
-              </mat-form-field>
+              <div class="col-md-3" [ngClass]="routeAnimationsElements">
+                <p> {{ 'budega.product.status.' + this.status || 'EMPTY' | translate }}
+                </p>
+              </div>
             </div>
             <div class='row'>
               <mat-form-field class="col-md-3" [ngClass]="routeAnimationsElements">
@@ -92,7 +89,7 @@
                 </mat-chip-list>
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCategory($event)">
                   <mat-option *ngFor="let category of allCategoriesList" [value]="category">
-                    {{category.name}}
+                    {{ category.name }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>

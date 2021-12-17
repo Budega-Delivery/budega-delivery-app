@@ -18,5 +18,9 @@ export enum PublicActionsTypes {
 
   loadClientCart = '[Cart] Load clients card',
   loadClientCardSuccess = '[Cart] Load clients card Success',
-  loadClientCardFailure = '[Cart] Load clients card Failure'
+  loadClientCardFailure = '[Cart] Load clients card Failure',
+
+  createOrder = '[Order] Create Order',
+  createOrderSuccess = '[Order] Create Order Success',
+  createOrderFailure = '[Order] Create Order Failure'
 }

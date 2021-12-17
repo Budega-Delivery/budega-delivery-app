@@ -19,6 +19,7 @@ import { Product } from '../admin/product/models/models';
 import { AppState, CartItem, selectCart } from './public.selectors';
 import { select, Store } from '@ngrx/store';
 import { LocalStorageService } from '../core/local-storage/local-storage.service';
+import { OrderService } from '../service/order/order.service';
 
 export const PUBLIC_CART_KEY = 'CART';
 
@@ -118,6 +119,26 @@ export class PublicEffects {
     { dispatch: false }
   );
 
+  createOrder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PublicActionsTypes.createOrder),
+      exhaustMap(({ items }) =>
+        this.orderService.createOrder(items).pipe(
+          map((orderId) => ({
+            type: PublicActionsTypes.createOrderSuccess,
+            orderId
+          })),
+          catchError(
+            map((err) => ({
+              type: PublicActionsTypes.createOrderFailure,
+              err
+            }))
+          )
+        )
+      )
+    )
+  );
+
   /* Notifications */
 
   loadAvailableProductsNotification$ = createEffect(
@@ -165,7 +186,8 @@ export class PublicEffects {
     this.actions$.pipe(
       ofType(
         PublicActionsTypes.userClientRegister,
-        PublicActionsTypes.loadAvailableProducts
+        PublicActionsTypes.loadAvailableProducts,
+        PublicActionsTypes.createOrder
       ),
       map(() => ({
         type: LoadingBarActionTypes.showIndeterminateLoading
@@ -180,7 +202,10 @@ export class PublicEffects {
         PublicActionsTypes.userClientRegisterFailure,
 
         PublicActionsTypes.loadAvailableProductsFailure,
-        PublicActionsTypes.loadAvailableProductsSuccess
+        PublicActionsTypes.loadAvailableProductsSuccess,
+
+        PublicActionsTypes.createOrderSuccess,
+        PublicActionsTypes.createOrderFailure
       ),
       map(() => ({ type: LoadingBarActionTypes.hideIndeterminateLoading }))
     )
@@ -192,6 +217,7 @@ export class PublicEffects {
     private notificationService: NotificationService,
     private translateService: TranslateService,
     private productService: ProductService,
+    private orderService: OrderService,
     private publicStore: Store<AppState>,
     private localStorageService: LocalStorageService
   ) {}

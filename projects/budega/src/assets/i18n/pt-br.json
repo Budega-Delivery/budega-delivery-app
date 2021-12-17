@@ -102,6 +102,10 @@
   "budega.product.image.failure": "Erro ao atualizar imagem do produto. Contacte o suporte!",
   "budega.product.emptylist": "Nenhum produto cadastrado!",
   "budega.product.addnew": "Vamos começar, adicione um novo produto!",
+  "budega.product.status.EMPTY": "Vazio",
+  "budega.product.status.OUT_OF_STOCK": "Fora de estoque",
+  "budega.product.status.IN_STOCK": "Em estoque",
+  "budega.product.status.RUNNING_LOW": "Acabando",
 
   "budega.client.register": "Registre-se",
   "budega.client.create": "Registrar",

@@ -118,7 +118,7 @@ Articles with content that explains various approaches used to build this starte
 
 ```bash
 
-$ docker build -t yurisbv/budega-app:v0.0.6 .
-$ docker tag yurisbv/budega-app:v0.0.6 yurisbv/budega-app:latest
-$ docker push yurisbv/budega-app:v0.0.6
+$ docker build -t yurisbv/budega-app:v0.0.6a .
+$ docker tag yurisbv/budega-app:v0.0.6a yurisbv/budega-app:latest
+$ docker push yurisbv/budega-app:v0.0.6a
 ```

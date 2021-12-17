@@ -15,7 +15,8 @@ import {
   ProductBrand,
   ProductCategory,
   ProductDepartment,
-  ProductStock
+  ProductStock,
+  StockStatus
 } from '../models/models';
 import {
   loadProductToUpdate,
@@ -58,14 +59,15 @@ export class ProductEditComponent implements AfterViewInit {
   form: FormGroup;
   imageData: FormData = undefined;
   image: Image;
+  status: StockStatus;
 
   categoriesVisible = true;
   categoriesSelectable = true;
   categoriesRemovable = true;
   categoriesAddOnBlur = true;
   readonly categoriesSeparatorKeysCodes: number[] = [ENTER, COMMA];
-  categoriesList: ProductCategory[] = [];
-  allCategoriesList: ProductCategory[] = [];
+  categoriesList: Array<ProductCategory> = [];
+  allCategoriesList: Array<ProductCategory> = [];
 
   realPattern = { '0': { pattern: new RegExp('[0-9]') } };
 
@@ -88,7 +90,6 @@ export class ProductEditComponent implements AfterViewInit {
       name: ['', [Validators.required]],
       price: ['' || 0.0],
       brand: [''],
-      status: [''],
       department: [''],
       categories: [''],
       stockAmount: [0],
@@ -111,6 +112,7 @@ export class ProductEditComponent implements AfterViewInit {
           this.form.controls['stockMinimumAlert'].setValue(
             (v as unknown as ProductStock).minimumAlert
           );
+          this.status = (v as unknown as ProductStock).status;
         }
         if (k === 'categories')
           this.categoriesList = v as unknown as ProductCategory[];
@@ -146,7 +148,7 @@ export class ProductEditComponent implements AfterViewInit {
 
   canBeActive() {
     // verify minimum to be active
-    // show warning if cant be active
+    // show warning if his can't be active
     // if be active show success and active
     if (!this.activeToggle) return;
     if (
@@ -211,8 +213,10 @@ export class ProductEditComponent implements AfterViewInit {
     const value = event.value;
 
     if (value.trim()) {
-      this.categoriesList = Object.assign([], this.categoriesList);
-      this.categoriesList.push({ name: value.trim() });
+      this.allCategoriesList = [
+        ...this.allCategoriesList,
+        { name: value.trim() }
+      ];
     }
     if (input) {
       input.value = '';
@@ -224,7 +228,7 @@ export class ProductEditComponent implements AfterViewInit {
       !this.categoriesList.filter((c) => c._id === event.option.value._id)
         .length
     ) {
-      this.categoriesList.push(event.option.value);
+      this.categoriesList = [...this.categoriesList, event.option.value];
       this.categoriesInput.nativeElement.value = '';
     }
   }

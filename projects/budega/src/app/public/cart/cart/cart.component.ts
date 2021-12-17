@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../../../admin/product/models/models';
 import {
   addProductToCart,
+  createOrder,
   loadClientCart,
   removeProductFromCart
 } from '../../public.actions';
@@ -60,7 +61,9 @@ export class CartComponent implements OnInit {
     return amount;
   }
 
-  finishOrder() {}
+  finishOrder(items: CartItem[]) {
+    this.publicStore.dispatch(createOrder({ items }));
+  }
 
   getCartAmountValue(cart: Map<string, CartItem>): number {
     let amount = 0;

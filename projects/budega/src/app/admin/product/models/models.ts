@@ -1,4 +1,5 @@
-enum ProductStatus {
+// eslint-disable-next-line no-shadow
+export enum StockStatus {
   OUT_OF_STOCK = 'OUT_OF_STOCK',
   IN_STOCK = 'IN_STOCK',
   RUNNING_LOW = 'RUNNING_LOW'
@@ -28,7 +29,6 @@ export class Product {
   isActive: boolean;
   price: number;
   image: Image;
-  status: ProductStatus;
   department: ProductDepartment;
   brand: ProductBrand;
   categories: ProductCategory[];
@@ -67,6 +67,7 @@ export class ProductStock {
   amount: number;
   minimumAlert: number;
   stockHistory: ProductStockHistory;
+  status: StockStatus;
   createdAt: string;
   updatedAt: string;
 }
