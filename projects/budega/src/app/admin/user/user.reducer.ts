@@ -2,9 +2,6 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { BudegaUser, Role } from './models/models';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
-  activeBudegaUser,
-  activeBudegaUserFailure,
-  activeBudegaUserSuccess,
   loadBudegaRoles,
   loadBudegaRolesFailure,
   loadBudegaRolesSuccess,

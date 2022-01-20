@@ -1,6 +1,4 @@
 // eslint-disable-next-line no-shadow
-import { registerBudegaEmployee } from './user.actions';
-
 export enum UserActionsTypes {
   loadBudegaUsersAction = '[BudegaUser] Load Users',
   loadBudegaUsersSuccessAction = '[BudegaUser] Load Budega Users Success',

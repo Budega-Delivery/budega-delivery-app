@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/animations/route.animations';
 import { TranslateService } from '@ngx-translate/core';
 import { select, Store } from '@ngrx/store';
-import { AppState, CartItem, selectCart } from '../../public.selectors';
+import { AppState, selectCart } from '../../public.selectors';
 import { Observable } from 'rxjs';
 import { Product } from '../../../admin/product/models/models';
 import {
@@ -11,6 +11,7 @@ import {
   loadClientCart,
   removeProductFromCart
 } from '../../public.actions';
+import { CartItem } from '../cart.model';
 
 @Component({
   selector: 'budega-cart',

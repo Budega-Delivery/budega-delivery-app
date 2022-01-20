@@ -22,5 +22,9 @@ export enum PublicActionsTypes {
 
   createOrder = '[Order] Create Order',
   createOrderSuccess = '[Order] Create Order Success',
-  createOrderFailure = '[Order] Create Order Failure'
+  createOrderFailure = '[Order] Create Order Failure',
+
+  loadClientOrderList = '[Order] Load Client Order List',
+  loadClientOrderListSuccess = '[Order] Load Client Order List Success',
+  loadClientOrderListFailure = '[Order] Load Client Order List Failure'
 }

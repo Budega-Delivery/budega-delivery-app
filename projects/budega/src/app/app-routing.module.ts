@@ -4,6 +4,7 @@ import { AuthGuardService } from './core/keycloak/auth-guard.service';
 import { MainComponent } from './public/main/main/main.component';
 import { ClientRegisterComponent } from './public/client-register/client-register.component';
 import { CartComponent } from './public/cart/cart/cart.component';
+import { OrderComponent } from './public/order/order.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,12 @@ const routes: Routes = [
     component: CartComponent,
     canActivate: [AuthGuardService],
     data: { title: 'budega.menu.cart', roles: ['client'] }
+  },
+  {
+    path: 'compras',
+    component: OrderComponent,
+    canActivate: [AuthGuardService],
+    data: { title: 'budega.menu.client.orders', roles: ['client'] }
   },
   {
     path: 'admin',

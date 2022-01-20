@@ -6,6 +6,7 @@ import { ProductModule } from './product/product.module';
 import { SharedModule } from '../shared/shared.module';
 import { UserModule } from './user/user.module';
 import { NgxEchartsModule } from 'ngx-echarts';
+import {OrdersModule} from './orders/orders.module';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -15,6 +16,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     ProductModule,
     SharedModule,
     UserModule,
+    OrdersModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })

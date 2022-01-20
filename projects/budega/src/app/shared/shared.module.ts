@@ -73,6 +73,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+
 import { MatSortModule } from '@angular/material/sort';
 import { StoreModule } from '@ngrx/store';
 
@@ -86,6 +87,7 @@ import { CropperImageDialogComponent } from './cropper-image-dialog/cropper-imag
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+
 
 @NgModule({
   imports: [
@@ -114,8 +116,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatDividerModule,
     MatProgressBarModule,
     MatTableModule,
-    MatPaginatorModule,
-    MatSliderModule,
+    MatPaginatorModule,    
     MatNativeDateModule,
     MatSortModule,
     ReactiveComponentModule,

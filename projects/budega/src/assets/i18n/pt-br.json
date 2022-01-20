@@ -129,6 +129,14 @@
   "budega.user.active.toggle": "Deseja ativar este(a) usuário(a).",
   "budega.user.inactive.toggle": "Desativar este(a) usuário(a) implicará em remover o acesso dele(a) à Budega App.",
   "budega.user.active.success": "Sucesso, ao ativar ou desativar usuário(a).",
-  "budega.user.inactive.success": "Erro ao ativar ou desativar usuário(a)."
+  "budega.user.inactive.success": "Erro ao ativar ou desativar usuário(a).",
+
+  "budega.order.ORDER": "pedido realizado",
+  "budega.order.SEPARATING": "em seperação",
+  "budega.order.READY" : "aguardando entregador",
+  "budega.order.DELIVERY": "em rota de entrega",
+  "budega.order.CANCELLED": "cancelado",
+  "budega.order.DELIVERED": "entregue",
+  "budega.order.UNDELIVERED": "não localizado"
 
 }

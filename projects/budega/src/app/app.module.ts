@@ -10,12 +10,11 @@ import { initializer } from './core/keycloak/init';
 import { SharedModule } from './shared/shared.module';
 import { HasRoleDirective } from './core/keycloak/has-role.directive';
 import { MatBadgeModule } from '@angular/material/badge';
+
 import { StoreModule } from '@ngrx/store';
 import {
   publicFeatureKey,
-  metaReducers,
-  publicReducer,
-  reducers
+  publicReducer  
 } from './public/public.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PublicEffects } from './public/public.effects';
@@ -23,6 +22,9 @@ import { CommonModule } from '@angular/common';
 import { MainComponent } from './public/main/main/main.component';
 import { ClientRegisterComponent } from './public/client-register/client-register.component';
 import { CartModule } from './public/cart/cart.module';
+import {OrderComponent} from './public/order/order.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {CdkStepperModule} from '@angular/cdk/stepper';
 
 @NgModule({
   imports: [
@@ -41,20 +43,24 @@ import { CartModule } from './public/cart/cart.module';
 
     // Keycloak
     KeycloakAngularModule,
-    MatBadgeModule,
+
 
     // public
     StoreModule.forFeature(publicFeatureKey, publicReducer),
     EffectsModule.forFeature([PublicEffects]),
     CartModule,
     CommonModule,
-    SharedModule
+    MatBadgeModule,
+    SharedModule,
+    MatStepperModule,
+    CdkStepperModule
   ],
   declarations: [
     AppComponent,
     HasRoleDirective,
     MainComponent,
-    ClientRegisterComponent
+    ClientRegisterComponent,
+    OrderComponent
   ],
   bootstrap: [AppComponent],
   providers: [

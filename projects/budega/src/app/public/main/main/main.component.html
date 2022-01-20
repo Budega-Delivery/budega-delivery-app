@@ -1,7 +1,7 @@
 <div class='container'>
   <div class="row d-flex align-items-stretch">
     <ng-container *ngrxLet="productList$; let list; let e = $error, let c = $complete" >
-    <div class="col-6 col-sloadProductAmountm-4 col-md-3 col-lg-2" *ngFor='let item of list' [ngClass]="routeAnimationsElements">
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor='let item of list' [ngClass]="routeAnimationsElements">
         <mat-card class="product-card" >
         <img mat-card-image src="data:{{item.image.mimetype}};base64,{{item.image.buffer}}" alt="{{item.image.originalname}}">
         <mat-card-content>

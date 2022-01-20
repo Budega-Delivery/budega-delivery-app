@@ -12,6 +12,8 @@ import {
   addProductToCartSuccess,
   loadClientCardSuccess,
   loadClientCart,
+  loadClientOrderList,
+  loadClientOrderListSuccess,
   loadProducts,
   loadProductsFailure,
   loadProductsSuccess,
@@ -19,7 +21,9 @@ import {
   removeProductFromCartSuccess
 } from './public.actions';
 import { initPublicStateFromLocalStorage } from '../core/meta-reducers/init-state-from-local-storage.reducer';
-import { AppState, CartItem } from './public.selectors';
+import { AppState } from './public.selectors';
+import { CartItem } from './cart/cart.model';
+import { Order } from './order/order.model';
 
 export const publicFeatureKey = 'public';
 
@@ -34,12 +38,14 @@ export const metaReducers: MetaReducer<AppState>[] = [
 export interface State {
   productList: Product[];
   cart: Map<string, CartItem>;
+  orderList: Order[];
   error?: HttpErrorResponse;
 }
 
 export const initialState: State = {
   productList: [],
-  cart: new Map<string, CartItem>()
+  cart: new Map<string, CartItem>(),
+  orderList: []
 };
 
 export const reducer = createReducer(
@@ -73,6 +79,11 @@ export const reducer = createReducer(
   on(loadClientCardSuccess, (state, { cart }) => ({
     ...state,
     cart
+  })),
+  on(loadClientOrderList, (state) => state),
+  on(loadClientOrderListSuccess, (state, { orderList }) => ({
+    ...state,
+    orderList
   }))
 );
 

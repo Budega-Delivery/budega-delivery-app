@@ -20,7 +20,8 @@ import {
   actionSettingsChangeLanguage
 } from '../core/settings/settings.actions';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AppState, CartItem, selectCart } from '../public/public.selectors';
+import { AppState, selectCart } from '../public/public.selectors';
+import { CartItem } from '../public/cart/cart.model';
 
 @Component({
   selector: 'budega-root',
@@ -50,7 +51,7 @@ export class AppComponent implements OnInit {
     { link: 'admin/painel', label: 'budega.menu.manager', roles: ['manager'] },
     { link: 'admin/usuarios', label: 'budega.menu.users', roles: ['manager'] },
     {
-      link: 'admin/deliveries',
+      link: 'admin/entregas',
       label: 'budega.menu.deliveries',
       roles: ['manager', 'deliveryperson', 'stockist']
     }

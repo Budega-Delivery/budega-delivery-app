@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CartItem } from '../../public/public.selectors';
+import { Order } from '../../public/order/order.model';
+import { CartItem } from '../../public/cart/cart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,11 @@ export class OrderService {
       { itemsList: orderWithoutImage },
       { reportProgress: true }
     );
+  }
+
+  getAll(): Observable<Order[]> {
+    return this.httpClient.get<Order[]>(
+      `${this.api.url}/${this.resource}`
+      );
   }
 }

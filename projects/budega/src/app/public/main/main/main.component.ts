@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Product } from '../../../admin/product/models/models';
 import {
   AppState,
-  CartItem,
   selectAvailableProducts,
   selectCart
 } from '../../public.selectors';
@@ -16,6 +15,7 @@ import {
   loadProducts,
   removeProductFromCart
 } from '../../public.actions';
+import { CartItem } from '../../cart/cart.model';
 
 @Component({
   selector: 'budega-main',

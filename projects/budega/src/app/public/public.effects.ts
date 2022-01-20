@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { PublicActionsTypes } from './PublicActionsTypes';
 import {
   catchError,
   exhaustMap,
   map,
-  mergeMap,
+  tap,
   switchMap,
   withLatestFrom
 } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../service/user/user.service';
 import { NotificationService } from '../core/notifications/notification.service';
@@ -16,10 +17,11 @@ import { LoadingBarActionTypes } from '../shared/loading-bar/loadingBarActionsTy
 import { of } from 'rxjs';
 import { ProductService } from '../service/product/product.service';
 import { Product } from '../admin/product/models/models';
-import { AppState, CartItem, selectCart } from './public.selectors';
-import { select, Store } from '@ngrx/store';
+import { AppState, selectCart } from './public.selectors';
+import { Store } from '@ngrx/store';
 import { LocalStorageService } from '../core/local-storage/local-storage.service';
 import { OrderService } from '../service/order/order.service';
+import { CartItem } from './cart/cart.model';
 
 export const PUBLIC_CART_KEY = 'CART';
 
@@ -139,6 +141,51 @@ export class PublicEffects {
     )
   );
 
+  createOrderSuccess$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(
+        PublicActionsTypes.createOrderSuccess
+      ),
+      tap(
+        () =>  {
+          this.localStorageService.setItem(
+            PUBLIC_CART_KEY,
+            {}
+          )
+          this.router.navigateByUrl('/compras')             
+        }
+      )        
+    ),
+    {dispatch: false}
+  );
+
+  // createOrderFailure$ = createEffect(
+  //       () => this.actions$.pipe(
+      
+  //   )
+  //   )
+
+
+  loadClientOrderList$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(PublicActionsTypes.loadClientOrderList),
+    switchMap(() =>
+      this.orderService.getAll().pipe(
+        map((orderList) => ({
+          type: PublicActionsTypes.loadClientOrderListSuccess,
+          orderList
+        })),
+        catchError((error) =>
+          of({
+            type: PublicActionsTypes.loadClientOrderListFailure,
+            error
+          })
+        )
+      )
+    )
+  )
+);
+
   /* Notifications */
 
   loadAvailableProductsNotification$ = createEffect(
@@ -187,7 +234,8 @@ export class PublicEffects {
       ofType(
         PublicActionsTypes.userClientRegister,
         PublicActionsTypes.loadAvailableProducts,
-        PublicActionsTypes.createOrder
+        PublicActionsTypes.createOrder,
+        PublicActionsTypes.loadClientOrderList
       ),
       map(() => ({
         type: LoadingBarActionTypes.showIndeterminateLoading
@@ -205,7 +253,10 @@ export class PublicEffects {
         PublicActionsTypes.loadAvailableProductsSuccess,
 
         PublicActionsTypes.createOrderSuccess,
-        PublicActionsTypes.createOrderFailure
+        PublicActionsTypes.createOrderFailure,
+
+        PublicActionsTypes.loadClientOrderListSuccess,
+        PublicActionsTypes.loadClientOrderListFailure
       ),
       map(() => ({ type: LoadingBarActionTypes.hideIndeterminateLoading }))
     )
@@ -219,7 +270,8 @@ export class PublicEffects {
     private productService: ProductService,
     private orderService: OrderService,
     private publicStore: Store<AppState>,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {}
 }
 

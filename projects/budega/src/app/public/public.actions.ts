@@ -3,7 +3,8 @@ import { PublicActionsTypes } from './PublicActionsTypes';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ClientUser } from '../admin/user/models/models';
 import { Product } from '../admin/product/models/models';
-import { CartItem } from './public.selectors';
+import { CartItem } from './cart/cart.model';
+import { Order } from './order/order.model';
 
 export const userClientRegister = createAction(
   PublicActionsTypes.userClientRegister,
@@ -83,5 +84,19 @@ export const createOrderSuccess = createAction(
 
 export const createOrderFailure = createAction(
   PublicActionsTypes.createOrderFailure,
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const loadClientOrderList = createAction(
+  PublicActionsTypes.loadClientOrderList
+);
+
+export const loadClientOrderListSuccess = createAction(
+  PublicActionsTypes.loadClientOrderListSuccess,
+  props<{ orderList: Order[] }>()
+);
+
+export const loadClientOrderListFailure = createAction(
+  PublicActionsTypes.loadClientOrderListFailure,
   props<{ error: HttpErrorResponse }>()
 );

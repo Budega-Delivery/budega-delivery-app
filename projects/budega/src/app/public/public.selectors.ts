@@ -1,14 +1,14 @@
 import { createSelector, MetaReducer } from '@ngrx/store';
 import { Product } from '../admin/product/models/models';
+import { CartItem } from './cart/cart.model';
+import { Order } from './order/order.model';
 
-export interface CartItem {
-  amount: number;
-  product: Product;
-}
+
 
 export interface PublicState {
   productList: Product[];
   cart: Map<string, CartItem>;
+  orderList: Order[];
 }
 
 export interface AppState {
@@ -26,3 +26,8 @@ export const selectCart = createSelector(
   selectPublic,
   (state: PublicState) => state.cart
 );
+
+export const selectClientOrderList = createSelector(
+  selectPublic,
+  (state: PublicState) => state.orderList
+)

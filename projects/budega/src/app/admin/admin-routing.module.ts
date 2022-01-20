@@ -7,6 +7,7 @@ import { Product } from './product/models/models';
 import { UsersMainComponent } from './user/main/users-main.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
+import {AdminOrdersComponent} from './orders/main/admin-orders.component';
 
 const routes: Routes = [
   {
@@ -60,7 +61,26 @@ const routes: Routes = [
       roles: ['manager'],
       product: Product
     }
-  }
+  },
+  {
+    path: 'entregas',
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      title: 'budega.admin.orders',
+      roles: ['manager', 'stockist', 'deliveryperson']
+    }
+  },
+  // {
+  //   path: 'compras/:id',
+  //   component: UserEditComponent,
+  //   canActivate: [AuthGuardService],
+  //   data: {
+  //     title: 'budega.admin.product',
+  //     roles: ['manager', 'stockist', 'delivery-person'],
+  //     order: Order
+  //   }
+  // }
 ];
 
 @NgModule({
