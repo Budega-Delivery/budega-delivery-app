@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../admin/user/user.selectors';
 import { userClientRegister } from '../public.actions';
+import { invalidPassword } from './validators-directive/valid-password.directive';
 
 @Component({
   selector: 'budega-register',
@@ -16,8 +17,12 @@ export class ClientRegisterComponent implements OnInit {
   form = this.fb.group({
     firstName: ['', [Validators.required, Validators.minLength(4)]],
     lastName: ['', [Validators.required, Validators.minLength(4)]],
-    email: ['', [Validators.required, Validators.email]]
-    // password: ['', [Validators.required]]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', [Validators.required]]
+  },
+  {
+    validators: invalidPassword
   });
 
   constructor(private fb: FormBuilder, private userStore: Store<AppState>) {}

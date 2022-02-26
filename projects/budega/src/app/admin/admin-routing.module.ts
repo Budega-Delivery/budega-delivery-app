@@ -68,7 +68,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     data: {
       title: 'budega.admin.orders',
-      roles: ['manager', 'stockist', 'deliveryperson']
+      roles: ['manager', 'stockist', 'delivery-person']
     }
   },
   // {

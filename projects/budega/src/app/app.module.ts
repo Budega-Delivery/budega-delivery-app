@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { initializer } from './core/keycloak/init';
 import { SharedModule } from './shared/shared.module';
-import { HasRoleDirective } from './core/keycloak/has-role.directive';
 import { MatBadgeModule } from '@angular/material/badge';
 
 import { StoreModule } from '@ngrx/store';
@@ -25,6 +24,7 @@ import { CartModule } from './public/cart/cart.module';
 import {OrderComponent} from './public/order/order.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {CdkStepperModule} from '@angular/cdk/stepper';
+import { HasRoleModule } from './core/keycloak/has-role.module';
 
 @NgModule({
   imports: [
@@ -37,6 +37,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 
     // shared
     SharedModule,
+    HasRoleModule,
 
     // app
     AppRoutingModule,
@@ -51,13 +52,11 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
     CartModule,
     CommonModule,
     MatBadgeModule,
-    SharedModule,
     MatStepperModule,
     CdkStepperModule
   ],
   declarations: [
     AppComponent,
-    HasRoleDirective,
     MainComponent,
     ClientRegisterComponent,
     OrderComponent

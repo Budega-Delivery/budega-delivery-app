@@ -8,6 +8,7 @@ import { environment as env } from '../../environments/environment';
 import {
   authLogin,
   authLogout,
+  authRegister,
   routeAnimations,
   LocalStorageService,
   selectIsAuthenticated,
@@ -53,7 +54,7 @@ export class AppComponent implements OnInit {
     {
       link: 'admin/entregas',
       label: 'budega.menu.deliveries',
-      roles: ['manager', 'deliveryperson', 'stockist']
+      roles: ['manager', 'delivery-person', 'stockist']
     }
   ];
   navigationSideMenu = [
@@ -110,6 +111,10 @@ export class AppComponent implements OnInit {
 
   onLogoutClick() {
     this.store.dispatch(authLogout());
+  }
+
+  onRegisterClick() {
+    this.store.dispatch(authRegister());
   }
 
   onLanguageSelect({ value: language }) {

@@ -22,6 +22,7 @@ import { Store } from '@ngrx/store';
 import { LocalStorageService } from '../core/local-storage/local-storage.service';
 import { OrderService } from '../service/order/order.service';
 import { CartItem } from './cart/cart.model';
+import { CoreActionsTypes } from '../core/auth/coreActionsTypes';
 
 export const PUBLIC_CART_KEY = 'CART';
 
@@ -209,9 +210,9 @@ export class PublicEffects {
           this.translateService
             .get('budega.client.register.success')
             .subscribe((res) => this.notificationService.success(res))
-        )
+        ),
+        map(() => ({type: CoreActionsTypes.authLogin}))
       ),
-    { dispatch: false }
   );
 
   registerClientFailureNotification$ = createEffect(
@@ -221,7 +222,7 @@ export class PublicEffects {
         map(() =>
           this.translateService
             .get('budega.client.register.failure')
-            .subscribe((res) => this.notificationService.success(res))
+            .subscribe((res) => this.notificationService.error(res))
         )
       ),
     { dispatch: false }

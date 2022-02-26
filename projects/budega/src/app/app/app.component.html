@@ -51,10 +51,13 @@
           </button>
 
           <mat-menu #matMenuOffline="matMenu">
-            <button mat-menu-item (click)="onLoginClick()">
+          <button mat-menu-item (click)="onLoginClick()">
               <span>{{ 'budega.menu.login' | translate }}</span>
             </button>
-            <button mat-menu-item [routerLink]="['/registrar']">
+            <!--button mat-menu-item (click)="onRegisterClick()">
+              <span>{{ 'budega.menu.register' | translate }}</span>
+            </button -->
+            <button mat-menu-item [routerLink]='"registrar"'>
               <span>{{ 'budega.menu.register' | translate }}</span>
             </button>
           </mat-menu>

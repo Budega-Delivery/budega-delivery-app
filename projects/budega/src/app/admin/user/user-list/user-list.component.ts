@@ -125,6 +125,7 @@ export class UserListComponent implements AfterViewInit, OnInit {
       });
   }
 
+  // TODO: need be removed
   formatLocal(date: number) {
     const d = new Date(date);
     return d.toLocaleDateString(this.translate.currentLang);

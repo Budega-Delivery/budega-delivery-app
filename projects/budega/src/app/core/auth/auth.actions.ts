@@ -9,6 +9,8 @@ export const authLoginSuccess = createAction(
   props<{ user: User }>()
 );
 
+export const authRegister = createAction(CoreActionsTypes.authRegister);
+
 export const authLogout = createAction(CoreActionsTypes.authLogout);
 
 export const authLogoutSuccess = createAction(

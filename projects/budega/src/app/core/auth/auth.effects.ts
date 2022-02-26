@@ -28,6 +28,22 @@ export class AuthEffects {
     { dispatch: false }
   );
 
+  register = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CoreActionsTypes.authRegister),
+        tap(() =>
+          this.keycloakService
+            .register({
+              // locale: 'pt-BR'
+              // redirectUri: 'http://localhost:4200'
+            })
+            .then(() => ({ type: CoreActionsTypes.authLoginSuccess }))
+        )
+      ),
+    { dispatch: false }
+  );
+
   loginSuccess = createEffect(
     () =>
       this.actions$.pipe(

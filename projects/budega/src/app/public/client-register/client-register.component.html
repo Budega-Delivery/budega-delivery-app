@@ -29,10 +29,34 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class='row'>
+            <div class="row">
+              <mat-form-field class="col-md-6 col-sm-8" [ngClass]="routeAnimationsElements">
+                <input type='password' matInput placeholder="{{'budega.user.password' | translate }}"
+                       formControlName="password">
+                    <mat-error *ngIf="form.get('password').errors?.['required']">
+                      {{'budega.notempty' | translate }}
+                    </mat-error>
+              </mat-form-field>            
+              <mat-form-field class="col-md-6 col-sm-8" [ngClass]="routeAnimationsElements">
+                <input type='password' matInput placeholder="{{'budega.user.confirm-password' | translate }}"
+                       formControlName="confirmPassword">
+                <mat-error *ngIf="form.get('confirmPassword').errors?.['required']">
+                  {{'budega.notempty' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <mat-error *ngIf="form.get('password').errors?.['minlength']">
+              {{'budega.password.error.minLength' | translate }}
+            </mat-error>
+
+            <mat-error *ngIf="form.errors?.['invalidPassword']">
+              {{'budega.password.error.notequal' | translate }}
+            </mat-error>
+            <span color='secondary' ><h3 *ngIf="!form.invalid">{{ 'budega.client.wellcome.form' | translate | titlecase }} </h3></span>
+            <div class='row'>              
               <button mat-stroked-button color='accent' [disabled]="form.invalid"  [ngClass]="routeAnimationsElements" (click)='save()'>
                 {{'budega.client.create' | translate }}
-              </button>
+              </button>              
             </div>
         </mat-card>
       </div>

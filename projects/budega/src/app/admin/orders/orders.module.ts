@@ -11,11 +11,10 @@ import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {MatStepperModule} from '@angular/material/stepper';
 import {CdkStepperModule} from '@angular/cdk/stepper';
-
+import { HasRoleModule } from '../../core/keycloak/has-role.module';
 
 
 @NgModule({
-  declarations: [AdminOrdersComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature(adminOrdersFeatureKey, adminOrdersReducer),
@@ -24,9 +23,11 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
     ReactiveComponentModule,
     SharedModule,
     RouterModule,
+    HasRoleModule,
     MatStepperModule,
     CdkStepperModule
   ],
+  declarations: [AdminOrdersComponent],
   exports: []
 })
 export class OrdersModule { }
