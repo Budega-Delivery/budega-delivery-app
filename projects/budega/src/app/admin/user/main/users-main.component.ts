@@ -26,7 +26,7 @@ export class UsersMainComponent implements OnInit {
   userList$: Observable<BudegaUser[]>;
   roleList$: Observable<Role[]>;
   form = this.fb.group({
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     role: [null, [Validators.required]]
   });
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Order } from '../../public/order/order.model';
+import { Order, OrderAddress, ORDER_STATE } from '../../public/order/order.model';
 import { CartItem } from '../../public/cart/cart.model';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) {}
 
-  createOrder(items: CartItem[]): Observable<string> {
+  createOrder(items: CartItem[], orderAddress: OrderAddress): Observable<string> {
     const orderWithoutImage = [];
     items.forEach((i) => {
       orderWithoutImage.push({
@@ -24,7 +24,7 @@ export class OrderService {
     });
     return this.httpClient.post<string>(
       `${this.api.url}/${this.resource}`,
-      { itemsList: orderWithoutImage },
+      { itemsList: orderWithoutImage, orderAddress: orderAddress },
       { reportProgress: true }
     );
   }
@@ -33,5 +33,12 @@ export class OrderService {
     return this.httpClient.get<Order[]>(
       `${this.api.url}/${this.resource}`
       );
+  }
+
+  updateOrder(id: string, state: ORDER_STATE): Observable<Order[]> {
+    return this.httpClient.post<Order[]>(
+      `${this.api.url}/${this.resource}/${id}`,
+      {state}
+    )
   }
 }

@@ -9,8 +9,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ReactiveComponentModule} from '@ngrx/component';
 import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
-import {MatStepperModule} from '@angular/material/stepper';
-import {CdkStepperModule} from '@angular/cdk/stepper';
+
 import { HasRoleModule } from '../../core/keycloak/has-role.module';
 
 
@@ -24,8 +23,7 @@ import { HasRoleModule } from '../../core/keycloak/has-role.module';
     SharedModule,
     RouterModule,
     HasRoleModule,
-    MatStepperModule,
-    CdkStepperModule
+    
   ],
   declarations: [AdminOrdersComponent],
   exports: []

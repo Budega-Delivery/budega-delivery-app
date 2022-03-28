@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ClientUser } from '../admin/user/models/models';
 import { Product } from '../admin/product/models/models';
 import { CartItem } from './cart/cart.model';
-import { Order } from './order/order.model';
+import { Order, OrderAddress } from './order/order.model';
 
 export const userClientRegister = createAction(
   PublicActionsTypes.userClientRegister,
@@ -74,7 +74,7 @@ export const loadClientCardFailure = createAction(
 
 export const createOrder = createAction(
   PublicActionsTypes.createOrder,
-  props<{ items: CartItem[] }>()
+  props<{ items: CartItem[], orderAddress: OrderAddress }>()
 );
 
 export const createOrderSuccess = createAction(

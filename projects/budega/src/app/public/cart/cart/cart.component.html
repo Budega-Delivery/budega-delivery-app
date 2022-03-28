@@ -39,13 +39,54 @@
                     </div>
                     </div>
                   </div>
-                </div>
+          </div>
           <mat-divider></mat-divider>
         </div>
+        <div style="margin-top: 1rem;">
+          <form [formGroup]="form">
+            <h3  [ngClass]="routeAnimationsElements">{{'budega.cart.address' | translate }}</h3>
+              <div class="row">
+                <mat-form-field class="col-md-3 col-sm-12" [ngClass]="routeAnimationsElements">
+                  <input matInput placeholder="{{'budega.cart.street' | translate }}"
+                          formControlName="street">
+                  <mat-error *ngIf="form.get('street').invalid">
+                    {{'budega.notempty' | translate }}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-2 col-sm-1" [ngClass]="routeAnimationsElements">
+                  <input matInput placeholder="{{'budega.cart.number' | translate }}"
+                          formControlName="number">
+                  <mat-error *ngIf="form.get('number').invalid">
+                    {{'budega.notempty' | translate }}
+                  </mat-error>
+                </mat-form-field>
+                </div>
+                <div class="row">
+                  <mat-form-field class="col-md-4 col-sm-2" [ngClass]="routeAnimationsElements">
+                    <input type='text' matInput placeholder="{{'budega.cart.cep' | translate }}"
+                            formControlName="cep">
+                    <mat-error *ngIf="form.get('cep').invalid">
+                      {{'budega.notempty' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <mat-form-field class="col-md-3 col-sm-2" [ngClass]="routeAnimationsElements">
+                    <input type='district' matInput placeholder="{{'budega.cart.district' | translate }}"
+                            formControlName="district">
+                        <mat-error *ngIf="form.get('district').errors?.['required']">
+                          {{'budega.notempty' | translate }}
+                        </mat-error>
+                  </mat-form-field>                                    
+                </div>
+              </form>
+        </div>
         <mat-card-actions class='d-flex justify-content-end'>
-          <button mat-flat-button color='accent' class='buy-button' (click)='finishOrder(cartArray(cart))'>
-            {{'budega.cart.order.buy' | translate}}
-          </button>
+            <div class="row">
+              <button mat-flat-button color='accent' class='buy-button' [disabled]="form.invalid"  [ngClass]="routeAnimationsElements" (click)='finishOrder(cartArray(cart))'>
+                {{'budega.cart.order.buy' | translate}}
+              </button>
+          </div>
           <h4>{{'budega.cart.order.total' | translate }}: {{ getCartAmountValue(cart) }}</h4>
         </mat-card-actions>
       </div>

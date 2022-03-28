@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import {Order} from '../../public/order/order.model';
-import {loadAdminOrders, loadAdminOrdersFailure, loadAdminOrdersSuccess} from './admin-orders.actions';
+import {loadAdminOrders, loadAdminOrdersFailure, loadAdminOrdersSuccess, updateAdminOrders, updateAdminOrdersSuccess, updateAdminOrdersFailure} from './admin-orders.actions';
 
 
 export const adminOrdersFeatureKey = 'adminOrders';
@@ -23,6 +23,15 @@ export const reducer = createReducer(
     adminOrders: adminOrders
   })),
   on(loadAdminOrdersFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
+  on(updateAdminOrders, (state) => state),
+  on(updateAdminOrdersSuccess, (state, { adminOrders }) => ({
+    ...state,
+    adminOrders: adminOrders
+  })),
+  on(updateAdminOrdersFailure, (state, { error }) => ({
     ...state,
     error
   }))

@@ -125,8 +125,8 @@ export class PublicEffects {
   createOrder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PublicActionsTypes.createOrder),
-      exhaustMap(({ items }) =>
-        this.orderService.createOrder(items).pipe(
+      exhaustMap(({ items, orderAddress }) =>
+        this.orderService.createOrder(items, orderAddress).pipe(
           map((orderId) => ({
             type: PublicActionsTypes.createOrderSuccess,
             orderId

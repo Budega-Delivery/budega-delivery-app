@@ -52,10 +52,15 @@ import {
   faUserCircle,
   faPlayCircle,
   faShoppingCart,
+  faShoppingBag,
   faPaperPlane,
   faTimesCircle,
   faSave,
-  faBan
+  faBan,
+  faPencilAlt,
+  faShoppingBasket,
+  faBicycle,
+  faClock
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
@@ -87,6 +92,9 @@ import { CropperImageDialogComponent } from './cropper-image-dialog/cropper-imag
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { OrderTimelineComponent } from './order-timeline/order-timeline.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {CdkStepperModule} from '@angular/cdk/stepper';
 
 
 @NgModule({
@@ -119,13 +127,15 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatPaginatorModule,    
     MatNativeDateModule,
     MatSortModule,
+    MatStepperModule,
+    CdkStepperModule,
+    MatDialogModule,
     ReactiveComponentModule,
 
     FontAwesomeModule,
 
     StoreModule.forFeature(loadingBarFeatureKey, loadingBarReducer),
-    ImageCropperModule,
-    MatDialogModule
+    ImageCropperModule    
   ],
   declarations: [
     BigInputComponent,
@@ -133,7 +143,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     RtlSupportDirective,
     LoadingBarComponent,
     CropperImageDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    OrderTimelineComponent
   ],
   exports: [
     CommonModule,
@@ -166,6 +177,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatSliderModule,
     MatNativeDateModule,
     MatSortModule,
+    MatStepperModule,
+    CdkStepperModule,
     ReactiveComponentModule,
 
     FontAwesomeModule,
@@ -173,6 +186,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     BigInputComponent,
     BigInputActionComponent,
     RtlSupportDirective,
+    OrderTimelineComponent,
 
     LoadingBarComponent
   ]
@@ -210,10 +224,15 @@ export class SharedModule {
       faInstagram,
       faYoutube,
       faShoppingCart,
+      faShoppingBag,
       faPaperPlane,
+      faShoppingBasket,
       faTimesCircle,
       faSave,
-      faBan
-    );
+      faBan,
+      faPencilAlt,
+      faBicycle,
+      faClock
+      );
   }
 }

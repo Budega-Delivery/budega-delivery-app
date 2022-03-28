@@ -12,6 +12,7 @@ import {
   removeProductFromCart
 } from '../../public.actions';
 import { CartItem } from '../cart.model';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'budega-cart',
@@ -22,18 +23,20 @@ import { CartItem } from '../cart.model';
 export class CartComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   cart$: Observable<Map<string, CartItem>>;
+  form = this.fb.group({
+    street: ['', [Validators.required, Validators.minLength(4)]],
+    number: ['', [Validators.required]],
+    cep: ['', [Validators.required]],
+    district: ['', [Validators.required]]
+  });
   /*
    * TODO: ADD ADDRESS SELECTOR
-   * TODO: ADD BOTÃO DE COMPRAR
-   * TODO: ADD VALOR TOTAL
-   * TODO: CRIAR LAYOUT TELA DE "MINHAS COMPRAS"
-   * TODO: CRIAR LAYOUT TELA DE ESTOQUE
-   * TODO: CRIAR LAYOUT TELA DE ENTREGA
    * TODO: LISTAR ROTAS DA API
    *   */
   constructor(
     private translate: TranslateService,
-    private publicStore: Store<AppState>
+    private publicStore: Store<AppState>,
+    private fb: FormBuilder
   ) {
     this.publicStore.dispatch(loadClientCart());
   }
@@ -57,13 +60,9 @@ export class CartComponent implements OnInit {
     return Array.from(cart.values());
   }
 
-  teste(amount: CartItem) {
-    console.log(amount);
-    return amount;
-  }
 
   finishOrder(items: CartItem[]) {
-    this.publicStore.dispatch(createOrder({ items }));
+    this.publicStore.dispatch(createOrder({ items: items, orderAddress: this.form.value }));
   }
 
   getCartAmountValue(cart: Map<string, CartItem>): number {
@@ -73,4 +72,6 @@ export class CartComponent implements OnInit {
     });
     return amount;
   }
+
+  save(){}
 }

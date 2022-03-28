@@ -55,6 +55,11 @@ export class AppComponent implements OnInit {
       link: 'admin/entregas',
       label: 'budega.menu.deliveries',
       roles: ['manager', 'delivery-person', 'stockist']
+    },
+    {
+      link: '/compras',
+      label: 'budega.menu.orders',
+      roles: ['client']
     }
   ];
   navigationSideMenu = [

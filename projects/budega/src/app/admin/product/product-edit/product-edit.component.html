@@ -10,10 +10,10 @@
               <strong>{{ form.controls['name'].value }}</strong>
                 <mat-slide-toggle #activeToggle formControlName="active">{{ 'budega.product.active' | translate }}</mat-slide-toggle>
                 <div>
-                  <button class='button-fab-action' mat-mini-fab color="accent" (click)="removeProduct()" matTooltip="{{'budega.remove' | translate }}">
+                  <button class='button-fab-action' mat-mini-fab color="primary" (click)="removeProduct()" matTooltip="{{'budega.remove' | translate }}">
                    <fa-icon icon="trash"></fa-icon>
                   </button>
-                  <button class='button-fab-action' mat-mini-fab color="primary" matTooltip="{{'budega.save' | translate }}" (click)="save()">
+                  <button class='button-fab-action' mat-mini-fab color="accent" matTooltip="{{'budega.save' | translate }}" (click)="save()">
                     <fa-icon icon="save"></fa-icon>
                   </button>
                 </div>

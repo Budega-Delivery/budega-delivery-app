@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from '../../service/user/user.service';
 import { UserActionsTypes } from './UserActionsTypes';
-import { catchError, exhaustMap, map, switchMap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { LoadingBarActionTypes } from '../../shared/loading-bar/loadingBarActionsTypes';
 import { NotificationService } from '../../core/notifications/notification.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -259,6 +259,18 @@ export class UserEffects {
     { dispatch: false }
   );
 
+  beforeUpdateUser$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          UserActionsTypes.updateBudegaUserSuccessAction,
+          UserActionsTypes.updateBudegaUserFailureAction
+        ),
+        tap(() => this.router.navigateByUrl('/admin/usuarios'))
+      ),
+    { dispatch: false }
+  );
+
   registerBudegaEmployeeSuccessNotification$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -272,7 +284,6 @@ export class UserEffects {
     { dispatch: false }
   );
 
-  // TODO: API MUST RETURN USER ADDED ID
   beforeCreateGoToUpdateEmployeePage$ = createEffect(
     () =>
       this.actions$.pipe(

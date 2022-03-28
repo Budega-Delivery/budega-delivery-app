@@ -1,7 +1,10 @@
 // eslint-disable-next-line no-shadow
 export enum StockStatus {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   OUT_OF_STOCK = 'OUT_OF_STOCK',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   IN_STOCK = 'IN_STOCK',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   RUNNING_LOW = 'RUNNING_LOW'
 }
 
@@ -74,7 +77,9 @@ export class ProductStock {
 
 // eslint-disable-next-line no-shadow
 enum StockHistoryAction {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   GET = 'Get',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   PUSH = 'Push'
 }
 

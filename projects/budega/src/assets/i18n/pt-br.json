@@ -120,7 +120,10 @@
   "budega.user.active": "Ativado",
   "budega.user.editing": "Editando usuário(a)",
   "budega.user.deactive": "Desativado",
+  "budega.user.update.success": "Sucesso ao atualizar usuário(a)",
+  "budega.user.register.failure": "Falha ao atualizar usuário(a)",
   "budega.user.email": "Email",
+  "budega.user.register.email": "Email do funcionário(a)",
   "budega.user.email.verified": "Email verificado",
   "budega.user.email.recheck": "Verificar email",
   "budega.user.avatar.alt": "Imagem do usuário",
@@ -138,13 +141,32 @@
   "budega.user.active.success": "Sucesso, ao ativar ou desativar usuário(a).",
   "budega.user.inactive.success": "Erro ao ativar ou desativar usuário(a).",
 
-  "budega.order.ORDER": "aguardando separação",
-  "budega.order.SEPARATING": "em seperação",
-  "budega.order.READY" : "aguardando entregador",
-  "budega.order.DELIVERY": "em rota de entrega",
   "budega.order.number": "pedido nº",
+  "budega.order.ORDER": "encomenda",
+  "budega.order.SEPARATING": "em seperação",
+  "budega.order.READY" : "encomenda pronta",
+  "budega.order.DELIVERING": "em rota de entrega",
+  "budega.order.DELIVERY": "em rota de entrega",
   "budega.order.CANCELLED": "cancelado",
   "budega.order.DELIVERED": "entregue",
-  "budega.order.UNDELIVERED": "não localizado"
+  "budega.order.UNDELIVERED": "não localizado",
+  "budega.order.FINISHED": "Finalizada",
+  "budega.menu.orders": "Compras",
+  "budega.order.waiting.delivering": "Pedido a caminho.",
+
+  "budega.cart.address": "Endereço da entrega",
+  "budega.cart.street": "Rua",
+  "budega.cart.cep": "CEP",
+  "budega.cart.district": "Bairro",
+  "budega.cart.number": "Número",
+
+  "budega.admin.dashboard.title": "Gerência",
+  "budega.admin.dashboard.subtitle": "Dados dos ultimos 30 dias",
+  "budega.admin.dashboard.orders.amount": "Total vendas",
+  "budega.admin.dashboard.orders.revenues": "Lucro bruto",
+  "budega.admin.dashboard.orders.byday": "Compras por dia",
+  "budega.admin.dashboard.products.stock": "Estoque de produtos",
+
+  "budega.cropper.image.dialog.title": "Recorte a imagem"
 
 }

@@ -1,23 +1,43 @@
+import { Product } from '../../admin/product/models/models';
+
 export interface Item {
     amount: number;
     productId: string;
 }
 
+export interface OrderAddress {
+    street: string,
+    cep: string,
+    number: string,
+    district: string
+  }
 export interface Order {
-    addressId: string;
+    _id: string;
+    orderAddress: OrderAddress;
     itemsList: Item[];
     paymentMode: string;
-    state: string;
-    timeLine: [];
+    state: ORDER_STATE;
+    timeline: OrderTimeline[];
     userId: string;
-    _id: string;
+    items: Product[];
 }
-/*
-addressId: ""
-itemsList: [{amount: 5, productId: "61a455437a5273aa231200ab"},…]
-paymentMode: "MONEY"
-state: "ORDER"
-timeline: [{date: "2021-12-07T06:10:27.721Z", userId: "04024338-fd8b-42ee-917c-c992b2366979", state: "ORDER"}]
-userId: "04024338-fd8b-42ee-917c-c992b2366979"
-_id: "61aefad3218f5296e3817a00"
-*/
+
+
+export interface OrderTimeline {
+    date: string;
+    userId: string;
+    state: ORDER_STATE;
+}
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export type PAYMENT_MODE = 'MONEY' | 'CART' | 'PIX';
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export type ORDER_FINISHED = 'CANCELLED' | 'DELIVERED' | 'UNDELIVERED';
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export type ORDER_STATE =
+  | 'ORDER'
+  | 'SEPARATING'
+  | 'READY'
+  | 'DELIVERY'
+  | ORDER_FINISHED;
+

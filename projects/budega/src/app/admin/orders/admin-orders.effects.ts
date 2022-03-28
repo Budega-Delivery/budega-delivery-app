@@ -13,25 +13,25 @@ import {OrderService} from '../../service/order/order.service';
 @Injectable()
 export class AdminOrdersEffects {
 
-    // updateAdminOrders$ = createEffect(() =>
-    //     this.actions$.pipe(
-    //         ofType(PublicActionsTypes.createOrder),
-    //         exhaustMap(({ items }) =>
-    //             this.orderService.createOrder(items).pipe(
-    //                 map((orderId) => ({
-    //                     type: PublicActionsTypes.createOrderSuccess,
-    //                     orderId
-    //                 })),
-    //                 catchError(
-    //                     map((err) => ({
-    //                         type: PublicActionsTypes.createOrderFailure,
-    //                         err
-    //                     }))
-    //                 )
-    //             )
-    //         )
-    //     )
-    // );
+    updateAdminOrders$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AdminOrdersActionsTypes.updateBudegaAdminOrdersAction),
+            exhaustMap(({ id, state }) =>
+                this.orderService.updateOrder(id, state).pipe(
+                    map((orderList) => ({
+                        type: AdminOrdersActionsTypes.updateBudegaAdminOrdersSuccessAction,
+                        orderList
+                    })),
+                    catchError(
+                        map((err) => ({
+                            type: AdminOrdersActionsTypes.updateBudegaAdminOrdersFailureAction,
+                            err
+                        }))
+                    )
+                )
+            )
+        )
+    );
 
     loadAdminOrders$ = createEffect(() =>
         this.actions$.pipe(
