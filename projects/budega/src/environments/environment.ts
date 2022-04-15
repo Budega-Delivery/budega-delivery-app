@@ -11,11 +11,11 @@ export const environment = {
   production: false,
   test: false,
   api: {
-    // url: 'https://api.budega.website'
+    // url: 'https://api.cactus.dev.br'
     url: 'http://localhost:3000'
   },
   keycloak: {
-    url: 'https://auth.budega.website/auth/',
+    url: 'https://auth.cactus.dev.br/auth/',
     realm: 'budega',
     clientId: 'budega-app'
   },

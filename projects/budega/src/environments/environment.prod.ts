@@ -6,10 +6,10 @@ export const environment = {
   production: true,
   test: false,
   api: {
-    url: 'https://api.budega.website'
+    url: 'https://api.cactus.dev.br'
   },
   keycloak: {
-    url: 'https://auth.budega.website/auth/',
+    url: 'https://auth.cactus.dev.br/auth/',
     realm: 'budega',
     clientId: 'budega-app'
   },
